@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://coq8dg2n0t55p"]
+
+[ext_resource type="Script" path="res://autoload/autoload.gd" id="1_pf557"]
+
+[node name="autoload" type="Node2D"]
+script = ExtResource("1_pf557")

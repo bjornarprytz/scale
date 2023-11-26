@@ -1,0 +1,31 @@
+[gd_scene load_steps=4 format=3 uid="uid://bqkl2fyr4no5r"]
+
+[ext_resource type="FontFile" uid="uid://ck5dgaslygqp3" path="res://things/VT323-Regular.ttf" id="1_lolog"]
+[ext_resource type="Script" path="res://things/known.gd" id="1_pjv5l"]
+
+[sub_resource type="Theme" id="Theme_cqygd"]
+default_font = ExtResource("1_lolog")
+default_font_size = 48
+
+[node name="Known" type="VBoxContainer"]
+script = ExtResource("1_pjv5l")
+
+[node name="H" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="ColorRect" type="ColorRect" parent="H"]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Known" type="RichTextLabel" parent="H"]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+theme = SubResource("Theme_cqygd")
+text = "=5"
+
+[node name="Button" type="Button" parent="."]
+modulate = Color(1, 0, 0, 1)
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+text = "X"

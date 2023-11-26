@@ -1,0 +1,74 @@
+[gd_scene load_steps=5 format=3 uid="uid://bv8m51jf40i6k"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_860qy"]
+[ext_resource type="PackedScene" uid="uid://y0ij617emvpo" path="res://things/scale.tscn" id="2_2c80t"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_02jkl"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3odtk"]
+size = Vector2(265.383, 19.9313)
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_860qy")
+
+[node name="Floor" type="StaticBody2D" parent="."]
+position = Vector2(557, 595)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor"]
+shape = SubResource("WorldBoundaryShape2D_02jkl")
+
+[node name="Scale" parent="." instance=ExtResource("2_2c80t")]
+position = Vector2(829, 593)
+
+[node name="Bowl" type="Node" parent="."]
+
+[node name="Bottom" type="StaticBody2D" parent="Bowl"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bowl/Bottom"]
+position = Vector2(67.0948, 557.959)
+rotation = 0.286654
+shape = SubResource("RectangleShape2D_3odtk")
+
+[node name="Left" type="StaticBody2D" parent="Bowl"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bowl/Left"]
+position = Vector2(272.008, 570.35)
+rotation = -0.313195
+scale = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_3odtk")
+
+[node name="ColorRect" type="ColorRect" parent="Bowl"]
+offset_left = 183.0
+offset_top = 589.0
+offset_right = 406.0
+offset_bottom = 617.0
+rotation = -0.318489
+
+[node name="ColorRect2" type="ColorRect" parent="Bowl"]
+offset_left = -60.0
+offset_top = 511.0
+offset_right = 207.0
+offset_bottom = 539.0
+rotation = 0.280023
+
+[node name="SpawnPoint" type="Node2D" parent="."]
+position = Vector2(23, 428)
+
+[node name="Cubes" type="Node" parent="."]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1153.0
+offset_bottom = 186.0
+
+[node name="AnswerGrid" type="GridContainer" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+columns = 8
