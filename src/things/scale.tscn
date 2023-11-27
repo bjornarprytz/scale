@@ -4,6 +4,7 @@
 [ext_resource type="Script" path="res://things/scale.gd" id="1_swjbf"]
 
 [sub_resource type="SystemFont" id="SystemFont_o56m1"]
+subpixel_positioning = 0
 
 [sub_resource type="Theme" id="Theme_8b5lr"]
 default_font = SubResource("SystemFont_o56m1")

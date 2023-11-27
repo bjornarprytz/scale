@@ -27,21 +27,25 @@ Scales with two platforms to put cubes on:
   - Instructions
 - Increase difficulty
   - Timer?
-  - Volatility?
-  - Blow up cubes on anwer-submit
+  - Volatility
+- Game over
 
 ### Nice to have
 
+- Elements behave differently
+- Conveyer belt with cube count
+- Shelves for organizing
+- Tab cycles through editable answers
+- Enter submits
 - Shrapnel remains after explosion
 - Music
+- Make it work on mobile
 
 ### Chores
 
-- Create Godot project (name it scale)
 - Setup itch.io page for scale [link](https://itch.io/game/new)
     - Set Kind to HTML
     - Set viewport dimensions (normal: 1152x648)
     - Check SharedArrayBuffer
 - Get Butler API key from [itch.io](https://itch.io/user/settings/api-keys)
-- Publish github repo
 - Add key to GitHub secrets as BUTLER_API_KEY [link](https://github.com/bjornarprytz/scale/settings/secrets/actions)

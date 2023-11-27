@@ -11,7 +11,7 @@ var possible_colors = [
 	Color.WEB_GREEN,
 	Color.MEDIUM_VIOLET_RED,
 	Color.BLACK,
-	Color.BROWN,
+	Color.BLUE_VIOLET,
 	Color.TEAL,
 	Color.BEIGE
 ]
@@ -26,9 +26,12 @@ func _ready() -> void:
 		while (chosen_weights.find(w) != -1):
 			w = randi_range(1, 12)
 		
+		chosen_weights.push_back(w)
+		
 		var kind = ElementCube.Kind.new()
 		kind.color = c
 		kind.weight = w
+		kind.stability = randi_range(15, 30)
 		
 		kinds.push_back(kind)
 	

@@ -25,7 +25,17 @@ theme = SubResource("Theme_cqygd")
 placeholder_text = "=?"
 scroll_fit_content_height = true
 
-[node name="Button" type="Button" parent="."]
+[node name="H2" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Submit" type="Button" parent="H2"]
+modulate = Color(0, 0.643137, 0.270588, 1)
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Submit"
+
+[node name="Clear" type="Button" parent="H2"]
 modulate = Color(1, 0, 0, 1)
 custom_minimum_size = Vector2(30, 0)
 layout_mode = 2

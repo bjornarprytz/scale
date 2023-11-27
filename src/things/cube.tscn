@@ -7,7 +7,7 @@ size = Vector2(40, 40)
 
 [node name="Cube" type="RigidBody2D"]
 input_pickable = true
-max_contacts_reported = 2
+max_contacts_reported = 8
 contact_monitor = true
 script = ExtResource("1_talj7")
 
@@ -25,7 +25,7 @@ shape = SubResource("RectangleShape2D_xcpp7")
 position = Vector2(-20, -20)
 scale = Vector2(2.5, 2.5)
 emitting = false
-amount = 690
+amount = 69
 lifetime = 2.0
 one_shot = true
 explosiveness = 1.0
@@ -35,11 +35,13 @@ emission_colors = PackedColorArray()
 direction = Vector2(0, -1)
 spread = 180.0
 initial_velocity_min = 100.0
-initial_velocity_max = 200.0
+initial_velocity_max = 300.0
+angular_velocity_min = -50.0
+angular_velocity_max = 50.0
 damping_min = 20.0
 damping_max = 50.0
 scale_amount_min = 2.0
-scale_amount_max = 5.0
+scale_amount_max = 20.0
 
 [connection signal="body_entered" from="." to="." method="_on_RigidBody2D_body_entered"]
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]

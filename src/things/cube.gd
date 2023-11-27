@@ -4,6 +4,7 @@ class_name ElementCube
 class Kind:
 	var color : Color
 	var weight : int
+	var stability : int
 
 @export var damageMultiplier = 0.1  # You can adjust this value to control the damage
 

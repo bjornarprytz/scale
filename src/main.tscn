@@ -34,7 +34,6 @@ shape = SubResource("RectangleShape2D_3odtk")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Bowl/Left"]
 position = Vector2(272.008, 570.35)
 rotation = -0.313195
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_3odtk")
 
 [node name="ColorRect" type="ColorRect" parent="Bowl"]
@@ -71,4 +70,5 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/h_separation = 20
 columns = 8
