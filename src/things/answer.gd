@@ -24,19 +24,22 @@ func _submit():
 	submit.disabled = true
 	is_submitting = true
 
-	if (my_kind.weight == int(text_edit.text)):
+	var tween = create_tween()
+	
+	if (Autoload.submit_answer(my_kind, int(text_edit.text))):
 		submit.text = "Solved!"
+		tween.tween_property($H2/Submit/Sheen, "position:x", 150.0, 0.3)
 	else:
 		Autoload.purge.emit(my_kind)
 		
-		var tween = create_tween()
-		tween.tween_method(_set_submit_text_countdown, 5.0, 0.0, 5.0)
-		await tween.finished
+		var penalty = float((Autoload.wrong_answers)) * 5.0
+		tween.tween_method(_set_submit_text_countdown, penalty, 0.0, penalty)
 		
 		text_edit.editable = true
 		submit.disabled = false
 		submit.text = "Submit"
 	
+	await tween.finished
 	is_submitting = false
 
 func _set_submit_text_countdown(t: float):

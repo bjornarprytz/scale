@@ -38,10 +38,11 @@ func _on_RigidBody2D_body_entered(body: Node):
 
 func explode():
 	$Color.visible = false
-	freeze = true
+	set_deferred("freeze", true)
 	shape.set_deferred("disabled", true)
 	
 	boom.emitting = true
+	Autoload.exploded_cubes += 1
 	
 	await get_tree().create_timer(boom.lifetime).timeout
 	

@@ -1,10 +1,15 @@
-[gd_scene load_steps=5 format=3 uid="uid://bv8m51jf40i6k"]
+[gd_scene load_steps=7 format=3 uid="uid://bv8m51jf40i6k"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_860qy"]
 [ext_resource type="PackedScene" uid="uid://y0ij617emvpo" path="res://things/scale.tscn" id="2_2c80t"]
 [ext_resource type="PackedScene" uid="uid://bx07aexvlsy62" path="res://things/conveyer.tscn" id="3_1lvot"]
+[ext_resource type="FontFile" uid="uid://ck5dgaslygqp3" path="res://things/VT323-Regular.ttf" id="4_xs043"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_02jkl"]
+
+[sub_resource type="Theme" id="Theme_75p0t"]
+default_font = ExtResource("4_xs043")
+default_font_size = 256
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_860qy")
@@ -49,3 +54,25 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/h_separation = 20
 columns = 8
+
+[node name="WinText" type="RichTextLabel" parent="CanvasLayer"]
+visible = false
+offset_left = 400.0
+offset_top = 183.0
+offset_right = 714.0
+offset_bottom = 449.0
+theme = SubResource("Theme_75p0t")
+bbcode_enabled = true
+text = "[wave][rainbow freq=0.2]WIN"
+
+[node name="Score" type="RichTextLabel" parent="CanvasLayer"]
+visible = false
+offset_left = 385.0
+offset_top = 586.0
+offset_right = 756.0
+offset_bottom = 664.0
+theme = SubResource("Theme_75p0t")
+theme_override_font_sizes/normal_font_size = 64
+bbcode_enabled = true
+text = "[wave][rainbow freq=0.2]score:"
+fit_content = true

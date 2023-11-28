@@ -2,8 +2,12 @@ extends Node2D
 class_name Global
 
 signal purge(kind: ElementCube.Kind)
+signal game_over(won: bool)
 
 var kinds : Array[ElementCube.Kind] = []
+var correct_answers: Array[ElementCube.Kind] = []
+var wrong_answers := 0
+var exploded_cubes := 0
 
 var possible_colors = [
 	Color.AQUA,
@@ -15,6 +19,18 @@ var possible_colors = [
 	Color.TEAL,
 	Color.BEIGE
 ]
+
+func submit_answer(kind: ElementCube.Kind, answer: int) -> bool:
+	if (kind.weight == answer and correct_answers.find(kind) == -1):
+		correct_answers.push_back(kind)
+		if (correct_answers.size() == kinds.size()):
+			game_over.emit(true)
+		return true
+	
+	else:
+		wrong_answers += 1
+	
+	return false
 
 
 # Called when the node enters the scene tree for the first time.
@@ -37,7 +53,3 @@ func _ready() -> void:
 	
 	print("Initiated ", kinds.size(), " kinds")
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
