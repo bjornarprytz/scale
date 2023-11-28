@@ -2,13 +2,11 @@
 
 [ext_resource type="Script" path="res://main.gd" id="1_860qy"]
 [ext_resource type="PackedScene" uid="uid://y0ij617emvpo" path="res://things/scale.tscn" id="2_2c80t"]
+[ext_resource type="PackedScene" uid="uid://bx07aexvlsy62" path="res://things/conveyer.tscn" id="3_1lvot"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_02jkl"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_3odtk"]
-size = Vector2(265.383, 19.9313)
-
-[node name="Node2D" type="Node2D"]
+[node name="Game" type="Node2D"]
 script = ExtResource("1_860qy")
 
 [node name="Floor" type="StaticBody2D" parent="."]
@@ -17,41 +15,20 @@ position = Vector2(557, 595)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Floor"]
 shape = SubResource("WorldBoundaryShape2D_02jkl")
 
+[node name="ColorRect" type="ColorRect" parent="Floor"]
+offset_left = -578.0
+offset_right = 608.0
+offset_bottom = 57.0
+color = Color(1, 0.988235, 0.388235, 1)
+
 [node name="Scale" parent="." instance=ExtResource("2_2c80t")]
-position = Vector2(829, 593)
+position = Vector2(946, 505)
 
-[node name="Bowl" type="Node" parent="."]
-
-[node name="Bottom" type="StaticBody2D" parent="Bowl"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Bowl/Bottom"]
-position = Vector2(67.0948, 557.959)
-rotation = 0.286654
-shape = SubResource("RectangleShape2D_3odtk")
-
-[node name="Left" type="StaticBody2D" parent="Bowl"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Bowl/Left"]
-position = Vector2(272.008, 570.35)
-rotation = -0.313195
-shape = SubResource("RectangleShape2D_3odtk")
-
-[node name="ColorRect" type="ColorRect" parent="Bowl"]
-offset_left = 183.0
-offset_top = 589.0
-offset_right = 406.0
-offset_bottom = 617.0
-rotation = -0.318489
-
-[node name="ColorRect2" type="ColorRect" parent="Bowl"]
-offset_left = -60.0
-offset_top = 511.0
-offset_right = 207.0
-offset_bottom = 539.0
-rotation = 0.280023
+[node name="Conveyer" parent="." instance=ExtResource("3_1lvot")]
+position = Vector2(34, 510)
 
 [node name="SpawnPoint" type="Node2D" parent="."]
-position = Vector2(23, 428)
+position = Vector2(-33, 463)
 
 [node name="Cubes" type="Node" parent="."]
 

@@ -9,7 +9,7 @@ const SPAWN_TIME := 2.0
 @onready var spawn_point : Node2D = $SpawnPoint
 @onready var info : GridContainer = $CanvasLayer/Control/AnswerGrid
 
-var t := 0.0
+var t := 100.0
 var elapsed := 0.0
 
 func _ready() -> void:
@@ -37,12 +37,6 @@ func _purge(kind: ElementCube.Kind):
 			c.explode()
 
 func _process(delta: float) -> void:
-	elapsed += delta
-	
-	var c_pos = spawn_point.position.x
-	var pos = pingpong(c_pos + (elapsed * 100.0), 300.0)
-	spawn_point.position.x = pos
-
 	t += delta
 	
 	if (t > SPAWN_TIME and $Cubes.get_child_count() < 20):

@@ -1,7 +1,22 @@
-[gd_scene load_steps=5 format=3 uid="uid://y0ij617emvpo"]
+[gd_scene load_steps=9 format=3 uid="uid://y0ij617emvpo"]
 
 [ext_resource type="PackedScene" uid="uid://wfj8a3a87s8g" path="res://things/scale-arm.tscn" id="1_rkt60"]
 [ext_resource type="Script" path="res://things/scale.gd" id="1_swjbf"]
+[ext_resource type="Texture2D" uid="uid://b2dno8vk7ky55" path="res://things/scales.png" id="3_wic5h"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_evmdv"]
+bg_color = Color(0, 0.133333, 0.141176, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+corner_detail = 10
+anti_aliasing = false
 
 [sub_resource type="SystemFont" id="SystemFont_o56m1"]
 subpixel_positioning = 0
@@ -10,8 +25,25 @@ subpixel_positioning = 0
 default_font = SubResource("SystemFont_o56m1")
 default_font_size = 128
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7q17m"]
+size = Vector2(354, 90)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wahtn"]
+bg_color = Color(0.835294, 0.517647, 0, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+
 [node name="Scale" type="Node2D"]
 script = ExtResource("1_swjbf")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -177.0
+offset_right = 177.0
+offset_bottom = 90.0
+color = Color(0.482353, 0.482353, 0.482353, 1)
 
 [node name="LeftArm" parent="." instance=ExtResource("1_rkt60")]
 position = Vector2(-100, -1)
@@ -19,11 +51,39 @@ position = Vector2(-100, -1)
 [node name="RightArm" parent="." instance=ExtResource("1_rkt60")]
 position = Vector2(100, -1)
 
-[node name="Display" type="RichTextLabel" parent="."]
-offset_left = -9.0
-offset_top = -17.0
-offset_right = 68.0
-offset_bottom = 171.0
+[node name="Display" type="Panel" parent="."]
+offset_left = -18.0
+offset_top = 5.0
+offset_right = 18.0
+offset_bottom = 29.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_evmdv")
+
+[node name="Result" type="RichTextLabel" parent="Display"]
+modulate = Color(0.427451, 1, 0.278431, 1)
+layout_mode = 0
+offset_left = 9.0
+offset_top = -11.0
+offset_right = 86.0
+offset_bottom = 177.0
 scale = Vector2(0.25, 0.25)
 theme = SubResource("Theme_8b5lr")
 text = "="
+scroll_active = false
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(0, 45)
+shape = SubResource("RectangleShape2D_7q17m")
+
+[node name="Panel" type="Panel" parent="."]
+offset_left = 99.0
+offset_top = 13.0
+offset_right = 173.0
+offset_bottom = 87.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_wahtn")
+
+[node name="Scales" type="Sprite2D" parent="Panel"]
+position = Vector2(37, 37)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("3_wic5h")

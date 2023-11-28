@@ -2,8 +2,7 @@ extends Node2D
 
 @onready var left: Area2D = $LeftArm
 @onready var right: Area2D = $RightArm
-@onready var display: RichTextLabel = $Display
-
+@onready var display: RichTextLabel = $Display/Result
 
 func _physics_process(delta: float) -> void:
 	var left_cubes = left.get_overlapping_bodies()
@@ -12,6 +11,7 @@ func _physics_process(delta: float) -> void:
 	compare_cubes(left_cubes, right_cubes)
 
 func compare_cubes(left_cubes, right_cubes):
+	
 	var left_weight := 0
 	var right_weight := 0
 	
@@ -38,6 +38,10 @@ func _get_stack_of_cubes(cubes: Array) -> Array[ElementCube]:
 	
 	while !q.is_empty():
 		var cube = q.pop_front()
+		
+		if (full_cluster.find(cube) != -1):
+			continue
+			
 		full_cluster.push_back(cube)
 		var n = cube.get_colliding_bodies()
 		for c in n:

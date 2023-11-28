@@ -8,35 +8,25 @@ Stipulation: Physical
 ## Concept
 
 Carry cubes of unstable material to a scale in order to determine their weights
-
-4 colors of cubes:
-
-- Green
-- Red
-- Blue
-- Yellow
-
-Scales with two platforms to put cubes on:
-
-- Shows
+Scales with two platforms to put cubes on
 
 ## TODO
 
 - Upgrade UI
-  - Cube spawner
+  - Cube counter (e.g. 2/20)
   - Instructions
 - Increase difficulty
   - Timer?
   - Volatility
 - Game over
+  - Apply random force to all cubes
+  - Spawn many cubes
 
 ### Nice to have
 
 - Elements behave differently
-- Conveyer belt with cube count
 - Shelves for organizing
 - Tab cycles through editable answers
-- Enter submits
 - Shrapnel remains after explosion
 - Music
 - Make it work on mobile

@@ -2,6 +2,7 @@ extends VBoxContainer
 
 
 var my_kind : ElementCube.Kind
+var is_submitting : bool
 
 @onready var text_edit : TextEdit = $H/TextEdit
 @onready var submit : Button = $H2/Submit
@@ -10,14 +11,18 @@ var my_kind : ElementCube.Kind
 func _ready() -> void:
 	clear.button_down.connect(_clear)
 	submit.button_down.connect(_submit)
-	text_edit.text_changed.connect(_guard_text)
+	text_edit.text_changed.connect(_on_text_input)
 
 func _clear():
 	Autoload.purge.emit(my_kind)
 
 func _submit():
+	if (is_submitting):
+		return
+	
 	text_edit.editable = false
 	submit.disabled = true
+	is_submitting = true
 
 	if (my_kind.weight == int(text_edit.text)):
 		submit.text = "Solved!"
@@ -31,12 +36,15 @@ func _submit():
 		text_edit.editable = true
 		submit.disabled = false
 		submit.text = "Submit"
+	
+	is_submitting = false
 
 func _set_submit_text_countdown(t: float):
 	submit.text = "%0.1f" % t
 
-func _guard_text():
+func _on_text_input():
 	var final_text = ""
+	var should_submit = text_edit.text.ends_with('\n')
 
 	var regex = RegEx.new()
 	regex.compile("[0-9]")
@@ -51,6 +59,9 @@ func _guard_text():
 
 	text_edit.text = final_text
 	text_edit.set_caret_column(final_text.length())
+	
+	if should_submit and text_edit.text.length() > 0:
+		_submit()
 
 func set_kind(kind: ElementCube.Kind):
 	$H/ColorRect.color = kind.color

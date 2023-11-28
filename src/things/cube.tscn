@@ -1,12 +1,16 @@
-[gd_scene load_steps=3 format=3 uid="uid://ccgjssadsykiy"]
+[gd_scene load_steps=4 format=3 uid="uid://ccgjssadsykiy"]
 
 [ext_resource type="Script" path="res://things/cube.gd" id="1_talj7"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_4aivi"]
+friction = 0.5
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xcpp7"]
 size = Vector2(40, 40)
 
 [node name="Cube" type="RigidBody2D"]
 input_pickable = true
+physics_material_override = SubResource("PhysicsMaterial_4aivi")
 max_contacts_reported = 8
 contact_monitor = true
 script = ExtResource("1_talj7")
