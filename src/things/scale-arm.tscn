@@ -1,16 +1,25 @@
-[gd_scene load_steps=2 format=3 uid="uid://wfj8a3a87s8g"]
+[gd_scene load_steps=3 format=3 uid="uid://wfj8a3a87s8g"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_icay0"]
-size = Vector2(148, 2)
+size = Vector2(148, 7)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_smeqt"]
+size = Vector2(148, 5)
 
 [node name="Arm" type="Area2D"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -2.5)
 shape = SubResource("RectangleShape2D_icay0")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 offset_left = -74.0
-offset_top = -1.0
 offset_right = 74.0
-offset_bottom = 1.0
+offset_bottom = 5.0
 color = Color(0, 0, 0, 1)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(0, 2.5)
+shape = SubResource("RectangleShape2D_smeqt")

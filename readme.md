@@ -15,10 +15,6 @@ Scales with two platforms to put cubes on
 - Upgrade UI
   - Cube counter (e.g. 2/20)
   - Instructions
-  - Make scales react to weight
-- Increase difficulty
-  - Timer?
-  - Volatility
 
 ### Nice to have
 

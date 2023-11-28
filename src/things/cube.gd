@@ -22,6 +22,12 @@ var held : bool
 var hovered : bool
 
 func _physics_process(delta: float) -> void:
+	var vp_rect = get_viewport_rect().grow(60.0)
+	var my_rect = $Color.get_global_rect()
+	if (!vp_rect.encloses(my_rect)):
+		explode()
+		return
+	
 	if (!held):
 		return
 	
