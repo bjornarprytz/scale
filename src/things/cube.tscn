@@ -1,12 +1,17 @@
-[gd_scene load_steps=4 format=3 uid="uid://ccgjssadsykiy"]
+[gd_scene load_steps=6 format=3 uid="uid://ccgjssadsykiy"]
 
 [ext_resource type="Script" path="res://things/cube.gd" id="1_talj7"]
+[ext_resource type="FontFile" uid="uid://ck5dgaslygqp3" path="res://things/VT323-Regular.ttf" id="2_4tu4y"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_4aivi"]
 friction = 0.5
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xcpp7"]
 size = Vector2(40, 40)
+
+[sub_resource type="Theme" id="Theme_05hd1"]
+default_font = ExtResource("2_4tu4y")
+default_font_size = 256
 
 [node name="Cube" type="RigidBody2D"]
 input_pickable = true
@@ -46,6 +51,24 @@ damping_min = 20.0
 damping_max = 50.0
 scale_amount_min = 2.0
 scale_amount_max = 20.0
+
+[node name="Weight" type="RichTextLabel" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 247.0
+offset_bottom = 247.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.15, 0.15)
+mouse_filter = 2
+theme = SubResource("Theme_05hd1")
+bbcode_enabled = true
+scroll_active = false
 
 [connection signal="body_entered" from="." to="." method="_on_RigidBody2D_body_entered"]
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]

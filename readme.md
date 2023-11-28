@@ -12,10 +12,6 @@ Scales with two platforms to put cubes on
 
 ## TODO
 
-- Upgrade UI
-  - Cube counter (e.g. 2/20)
-  - Instructions
-
 ### Nice to have
 
 - Elements behave differently

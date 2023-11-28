@@ -1,6 +1,7 @@
 extends Node2D
 
 const MAX_SCORE := 69000
+const MAX_CUBES := 20
 var SPAWN_TIME := 2.0
 
 @onready var cube_spawner = preload("res://things/cube.tscn")
@@ -11,7 +12,7 @@ var SPAWN_TIME := 2.0
 @onready var info : GridContainer = $CanvasLayer/Control/AnswerGrid
 
 var won : bool
-var t := 100.0
+var t := 0.0
 var elapsed := 0.0
 
 func _ready() -> void:
@@ -34,6 +35,8 @@ func _ready() -> void:
 		an.set_kind(k)
 		
 		info.add_child(an)
+		
+	_spawn_cube(known_info)
 
 func _purge(kind: ElementCube.Kind):
 	for c in $Cubes.get_children():
@@ -45,6 +48,7 @@ func _game_over(win: bool):
 	
 	if (win):
 		SPAWN_TIME = 0.5
+		$CanvasLayer/Instructions.visible = false
 		$CanvasLayer/WinText.visible = true
 		$CanvasLayer/Score.visible = true
 		$CanvasLayer/Score.add_text(str(_score_formula()))
@@ -55,12 +59,9 @@ func _process(delta: float) -> void:
 	
 	if (t > SPAWN_TIME):
 		t = 0.0
-		if ($Cubes.get_child_count() < 20):
-			var cube = cube_spawner.instantiate() as ElementCube
-			cube.kind = Autoload.kinds.pick_random()
+		if ($Cubes.get_child_count() < MAX_CUBES):
+			_spawn_cube(Autoload.kinds.pick_random())
 			
-			$Cubes.add_child(cube)
-			cube.position = spawn_point.position
 		
 		if (won):
 			for c in $Cubes.get_children():
@@ -68,4 +69,14 @@ func _process(delta: float) -> void:
 		
 
 func _score_formula() -> int:
-	return (MAX_SCORE - (elapsed * 10.0) - (Autoload.exploded_cubes * 1000.0)) / (Autoload.wrong_answers +1)
+	return float(MAX_SCORE - (elapsed * 10.0) - (Autoload.exploded_cubes * 1000.0)) / float(Autoload.wrong_answers +1)
+
+func _spawn_cube(kind: ElementCube.Kind):
+	var cube = cube_spawner.instantiate() as ElementCube
+	cube.kind = kind
+	
+	$Cubes.add_child(cube)
+	cube.position = spawn_point.position
+
+	$CanvasLayer/CountPanel/Count.clear()
+	$CanvasLayer/CountPanel/Count.append_text("[center]" + str($Cubes.get_child_count()) + "/" + str(MAX_CUBES))

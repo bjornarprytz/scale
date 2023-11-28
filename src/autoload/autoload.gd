@@ -2,6 +2,7 @@ extends Node2D
 class_name Global
 
 signal purge(kind: ElementCube.Kind)
+signal correct_guess(kind: ElementCube.Kind)
 signal game_over(won: bool)
 
 var kinds : Array[ElementCube.Kind] = []
@@ -23,10 +24,10 @@ var possible_colors = [
 func submit_answer(kind: ElementCube.Kind, answer: int) -> bool:
 	if (kind.weight == answer and correct_answers.find(kind) == -1):
 		correct_answers.push_back(kind)
+		correct_guess.emit(kind)
 		if (correct_answers.size() == kinds.size()):
 			game_over.emit(true)
 		return true
-	
 	else:
 		wrong_answers += 1
 	

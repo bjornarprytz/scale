@@ -11,7 +11,12 @@ class Kind:
 var kind : Kind:
 	set(value):
 		kind = value
-		modulate = kind.color
+		$Color.modulate = kind.color
+		$Explosion.modulate = kind.color
+		if (Autoload.correct_answers.has(kind)):
+			_reveal_weight()
+		else:
+			Autoload.correct_guess.connect(_check_correct)
 
 @onready var boom : CPUParticles2D = $Explosion
 @onready var shape : CollisionShape2D = $Shape
@@ -20,6 +25,16 @@ var prev_pos : Vector2
 var momentum : Vector2
 var held : bool
 var hovered : bool
+
+func _check_correct(guessed_kind: ElementCube.Kind):
+	if guessed_kind == kind:
+		_reveal_weight()
+		Autoload.correct_guess.disconnect(_check_correct)
+
+func _reveal_weight():
+	$Weight.clear()
+	$Weight.append_text("[center]"+str(kind.weight))
+	$Weight.modulate = _get_contrast(kind.color)
 
 func _physics_process(delta: float) -> void:
 	var vp_rect = get_viewport_rect().grow(60.0)
@@ -44,6 +59,7 @@ func _on_RigidBody2D_body_entered(body: Node):
 
 func explode():
 	$Color.visible = false
+	$Weight.visible = false
 	set_deferred("freeze", true)
 	shape.set_deferred("disabled", true)
 	
@@ -81,3 +97,22 @@ func _on_mouse_entered() -> void:
 
 func _on_mouse_exited() -> void:
 	hovered = false
+	
+func _get_contrast(c : Color) -> Color:
+	var red = c.r
+	var green = c.g
+	var blue = c.b
+	var alpha = c.a
+	
+	# Convert red, green, and blue to relative luminance
+	var relative_luminance = 0.2126 * red + 0.7152 * green + 0.0722 * blue
+	
+	# Determine if the contrast color should be light or dark
+	var contrast_color: Color
+	if relative_luminance > 0.5:
+		contrast_color = Color(0, 0, 0, alpha)
+	else:
+		contrast_color = Color(1, 1, 1, alpha)
+	
+	return contrast_color
+
