@@ -1,6 +1,8 @@
 extends RigidBody2D
 class_name ElementCube
 
+signal exploded()
+
 class Kind:
 	var color : Color
 	var weight : int
@@ -25,6 +27,7 @@ var prev_pos : Vector2
 var momentum : Vector2
 var held : bool
 var hovered : bool
+var has_exploded : bool
 
 func _check_correct(guessed_kind: ElementCube.Kind):
 	if guessed_kind == kind:
@@ -58,6 +61,7 @@ func _on_RigidBody2D_body_entered(body: Node):
 		apply_damage(damage)
 
 func explode():
+	has_exploded = true
 	$Color.visible = false
 	$Weight.visible = false
 	set_deferred("freeze", true)
@@ -65,6 +69,7 @@ func explode():
 	
 	boom.emitting = true
 	Autoload.exploded_cubes += 1
+	exploded.emit()
 	
 	await get_tree().create_timer(boom.lifetime).timeout
 	

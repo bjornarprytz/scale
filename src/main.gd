@@ -81,10 +81,8 @@ func _process(delta: float) -> void:
 	
 	if (t > SPAWN_TIME):
 		t = 0.0
-		if ($Cubes.get_child_count() < MAX_CUBES):
+		if (_get_cube_count() < MAX_CUBES):
 			_spawn_cube(Autoload.kinds.pick_random())
-			
-		
 		if (won):
 			for c in $Cubes.get_children():
 				c.apply_force(Vector2(randf_range(-1.0, 1.0), randf_range(-1.0, 0.0)) * randf_range(30000.0, 50000.0))
@@ -99,6 +97,18 @@ func _spawn_cube(kind: ElementCube.Kind):
 	
 	$Cubes.add_child(cube)
 	cube.position = spawn_point.position
+	cube.exploded.connect(_update_cube_count, CONNECT_ONE_SHOT)
 
+	_update_cube_count()
+
+func _get_cube_count():
+	var count := 0
+	
+	for c in $Cubes.get_children():
+		if !c.has_exploded:
+			count += 1
+	return count
+
+func _update_cube_count():
 	$CanvasLayer/CountPanel/Count.clear()
-	$CanvasLayer/CountPanel/Count.append_text("[center]" + str($Cubes.get_child_count()) + "/" + str(MAX_CUBES))
+	$CanvasLayer/CountPanel/Count.append_text("[center]" + str(_get_cube_count()) + "/" + str(MAX_CUBES))
