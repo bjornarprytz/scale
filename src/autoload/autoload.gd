@@ -11,14 +11,14 @@ var wrong_answers := 0
 var exploded_cubes := 0
 
 var possible_colors = [
-	Color.AQUA,
+	Color.MEDIUM_AQUAMARINE,
 	Color.CORAL,
 	Color.WEB_GREEN,
 	Color.MEDIUM_VIOLET_RED,
-	Color.BLACK,
+	Color.MIDNIGHT_BLUE,
 	Color.BLUE_VIOLET,
 	Color.TEAL,
-	Color.BEIGE
+	Color.KHAKI
 ]
 
 func submit_answer(kind: ElementCube.Kind, answer: int) -> bool:
@@ -49,6 +49,7 @@ func _ready() -> void:
 		kind.color = c
 		kind.weight = w
 		kind.stability = randi_range(15, 30)
+		kind.bounce = randf_range(0.0, 0.8)
 		
 		kinds.push_back(kind)
 	

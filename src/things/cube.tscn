@@ -1,10 +1,12 @@
-[gd_scene load_steps=6 format=3 uid="uid://ccgjssadsykiy"]
+[gd_scene load_steps=7 format=3 uid="uid://ccgjssadsykiy"]
 
 [ext_resource type="Script" path="res://things/cube.gd" id="1_talj7"]
 [ext_resource type="FontFile" uid="uid://ck5dgaslygqp3" path="res://things/VT323-Regular.ttf" id="2_4tu4y"]
+[ext_resource type="Texture2D" uid="uid://dscec4wxigo04" path="res://things/white-square.png" id="3_2dnhe"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_4aivi"]
 friction = 0.5
+bounce = 0.49
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xcpp7"]
 size = Vector2(40, 40)
@@ -69,6 +71,12 @@ mouse_filter = 2
 theme = SubResource("Theme_05hd1")
 bbcode_enabled = true
 scroll_active = false
+
+[node name="Light" type="PointLight2D" parent="."]
+visible = false
+scale = Vector2(2.5, 2.5)
+energy = 0.5
+texture = ExtResource("3_2dnhe")
 
 [connection signal="body_entered" from="." to="." method="_on_RigidBody2D_body_entered"]
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]

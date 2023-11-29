@@ -7,6 +7,7 @@ class Kind:
 	var color : Color
 	var weight : int
 	var stability : int
+	var bounce : float
 
 @export var damageMultiplier = 0.1  # You can adjust this value to control the damage
 
@@ -15,6 +16,7 @@ var kind : Kind:
 		kind = value
 		$Color.modulate = kind.color
 		$Explosion.modulate = kind.color
+		physics_material_override.bounce = kind.bounce
 		if (Autoload.correct_answers.has(kind)):
 			_reveal_weight()
 		else:
@@ -22,6 +24,7 @@ var kind : Kind:
 
 @onready var boom : CPUParticles2D = $Explosion
 @onready var shape : CollisionShape2D = $Shape
+@onready var light : PointLight2D = $Light
 
 var prev_pos : Vector2
 var momentum : Vector2
@@ -99,9 +102,11 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func _on_mouse_entered() -> void:
 	hovered = true
+	light.visible = true
 
 func _on_mouse_exited() -> void:
 	hovered = false
+	light.visible = false
 	
 func _get_contrast(c : Color) -> Color:
 	var red = c.r

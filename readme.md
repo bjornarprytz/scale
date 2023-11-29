@@ -14,7 +14,6 @@ Scales with two platforms to put cubes on
 
 - Cube Juice
   - Shrapnel remains after explosion
-  - Elements behave differently
   - Tweak the volatility
 - Background
 
@@ -23,8 +22,3 @@ Scales with two platforms to put cubes on
 - Make cubes more visually interesting (shader magic?)
 - Music
 - Make it work on mobile
-
-### Chores
-
-- Get Butler API key from [itch.io](https://itch.io/user/settings/api-keys)
-- Add key to GitHub secrets as BUTLER_API_KEY [link](https://github.com/bjornarprytz/scale/settings/secrets/actions)
