@@ -12,12 +12,16 @@ Scales with two platforms to put cubes on
 
 ## TODO
 
+- Cube Juice
+  - Shrapnel remains after explosion
+  - Elements behave differently
+  - Tweak the volatility
+  - Make them jiggle
+- Background
+
 ### Nice to have
 
-- Elements behave differently
-- Shelves for organizing
-- Tab cycles through editable answers
-- Shrapnel remains after explosion
+- Make cubes more visually interesting (shader magic?)
 - Music
 - Make it work on mobile
 

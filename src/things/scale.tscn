@@ -35,6 +35,7 @@ offset_left = -9.0
 offset_top = -122.0
 offset_right = 9.0
 offset_bottom = 94.0
+mouse_filter = 2
 color = Color(0, 0.513726, 0.772549, 1)
 
 [node name="Base" type="ColorRect" parent="Visual"]
@@ -42,6 +43,7 @@ offset_left = -49.0
 offset_top = 85.0
 offset_right = 49.0
 offset_bottom = 94.0
+mouse_filter = 2
 color = Color(0, 0.513726, 0.772549, 1)
 
 [node name="Base2" type="ColorRect" parent="Visual"]
@@ -49,6 +51,7 @@ offset_left = -30.0
 offset_top = 77.0
 offset_right = 30.0
 offset_bottom = 86.0
+mouse_filter = 2
 color = Color(0, 0.513726, 0.772549, 1)
 
 [node name="Shoulder" type="ColorRect" parent="Visual"]
@@ -57,6 +60,7 @@ offset_top = -113.0
 offset_right = -114.0
 offset_bottom = 127.0
 rotation = -1.57079
+mouse_filter = 2
 color = Color(0, 0.513726, 0.772549, 1)
 
 [node name="Head" type="ColorRect" parent="Visual"]
@@ -65,6 +69,7 @@ offset_top = -122.0
 offset_right = 34.0
 offset_bottom = -111.0
 rotation = -1.57079
+mouse_filter = 2
 color = Color(0, 0.513726, 0.772549, 1)
 
 [node name="Head2" type="ColorRect" parent="Visual"]
@@ -73,6 +78,7 @@ offset_top = -146.0
 offset_right = -7.0
 offset_bottom = -100.0
 rotation = -1.57079
+mouse_filter = 2
 color = Color(0, 0.513726, 0.772549, 1)
 
 [node name="LeftString" type="ColorRect" parent="Visual"]
@@ -80,6 +86,7 @@ offset_left = -102.0
 offset_top = -113.0
 offset_right = -99.0
 rotation = -6.28318
+mouse_filter = 2
 color = Color(0, 0.513726, 0.772549, 1)
 
 [node name="RightString" type="ColorRect" parent="Visual"]
@@ -87,6 +94,7 @@ offset_left = 99.0
 offset_top = -113.0
 offset_right = 102.0
 rotation = -6.28318
+mouse_filter = 2
 color = Color(0, 0.513726, 0.772549, 1)
 
 [node name="LeftArm" parent="." instance=ExtResource("1_rkt60")]
@@ -100,6 +108,7 @@ offset_left = -18.0
 offset_top = 5.0
 offset_right = 18.0
 offset_bottom = 29.0
+mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_evmdv")
 
 [node name="Result" type="RichTextLabel" parent="Display"]
@@ -110,6 +119,7 @@ offset_top = -11.0
 offset_right = 86.0
 offset_bottom = 177.0
 scale = Vector2(0.25, 0.25)
+mouse_filter = 2
 theme = SubResource("Theme_8b5lr")
 text = "="
 scroll_active = false

@@ -14,6 +14,7 @@ var SPAWN_TIME := 2.0
 var won : bool
 var t := 0.0
 var elapsed := 0.0
+var focused_answer : RichTextLabel
 
 func _ready() -> void:
 	Autoload.purge.connect(_purge)
@@ -50,8 +51,29 @@ func _game_over(win: bool):
 		SPAWN_TIME = 0.5
 		$CanvasLayer/Instructions.visible = false
 		$CanvasLayer/WinText.visible = true
-		$CanvasLayer/Score.visible = true
-		$CanvasLayer/Score.add_text(str(_score_formula()))
+		$Floor/Score.visible = true
+		$Floor/Score.append_text(str(_score_formula()))
+
+func _shortcut_input(event: InputEvent) -> void:
+	
+	if (event.keycode == KEY_TAB):
+		var first : AnswerField
+		var previous : AnswerField
+		for a in $CanvasLayer/Control/AnswerGrid.get_children():
+			if !(a is AnswerField) or !a.editable:
+				continue
+			var answer_field = a as AnswerField
+			
+			if first == null:
+				first = answer_field
+			
+			if (previous != null and previous.focus):
+				answer_field.focus = true
+				return
+			
+			previous = answer_field
+		
+		first.focus = true
 
 func _process(delta: float) -> void:
 	t += delta

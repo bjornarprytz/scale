@@ -1,4 +1,5 @@
 extends VBoxContainer
+class_name AnswerField
 
 
 var my_kind : ElementCube.Kind
@@ -7,6 +8,19 @@ var is_submitting : bool
 @onready var text_edit : TextEdit = $H/TextEdit
 @onready var submit : Button = $H2/Submit
 @onready var clear : Button = $H2/Clear
+
+var editable: bool:
+	get:
+		return text_edit.editable
+
+var focus : bool:
+	get:
+		return text_edit.has_focus()
+	set(value):
+		if (value):
+			text_edit.grab_focus()
+		else:
+			text_edit.release_focus()
 
 func _ready() -> void:
 	clear.button_down.connect(_clear)
@@ -38,6 +52,7 @@ func _submit():
 		
 		await tween.finished
 		text_edit.editable = true
+		text_edit.clear()
 		submit.disabled = false
 		submit.text = "Submit"
 	

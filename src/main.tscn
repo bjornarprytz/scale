@@ -5,8 +5,6 @@
 [ext_resource type="PackedScene" uid="uid://bx07aexvlsy62" path="res://things/conveyer.tscn" id="3_1lvot"]
 [ext_resource type="FontFile" uid="uid://ck5dgaslygqp3" path="res://things/VT323-Regular.ttf" id="4_xs043"]
 
-[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_02jkl"]
-
 [sub_resource type="Theme" id="Theme_75p0t"]
 default_font = ExtResource("4_xs043")
 default_font_size = 256
@@ -37,33 +35,13 @@ corner_radius_bottom_left = 4
 default_font = ExtResource("4_xs043")
 default_font_size = 1256
 
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_02jkl"]
+
 [node name="Game" type="Node2D"]
 script = ExtResource("1_860qy")
 
-[node name="Floor" type="StaticBody2D" parent="."]
-position = Vector2(557, 595)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor"]
-shape = SubResource("WorldBoundaryShape2D_02jkl")
-
-[node name="ColorRect" type="ColorRect" parent="Floor"]
-offset_left = -578.0
-offset_right = 608.0
-offset_bottom = 57.0
-color = Color(0.14902, 0, 0.00784314, 1)
-
-[node name="Scale" parent="." instance=ExtResource("2_2c80t")]
-position = Vector2(946, 505)
-
-[node name="Conveyer" parent="." instance=ExtResource("3_1lvot")]
-position = Vector2(34, 510)
-
-[node name="SpawnPoint" type="Node2D" parent="."]
-position = Vector2(-33, 463)
-
-[node name="Cubes" type="Node" parent="."]
-
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = -1
 
 [node name="Control" type="Control" parent="CanvasLayer"]
 layout_mode = 3
@@ -90,18 +68,6 @@ offset_bottom = 449.0
 theme = SubResource("Theme_75p0t")
 bbcode_enabled = true
 text = "[wave][rainbow freq=0.2]WIN"
-
-[node name="Score" type="RichTextLabel" parent="CanvasLayer"]
-visible = false
-offset_left = 385.0
-offset_top = 586.0
-offset_right = 756.0
-offset_bottom = 664.0
-theme = SubResource("Theme_75p0t")
-theme_override_font_sizes/normal_font_size = 64
-bbcode_enabled = true
-text = "[wave][rainbow freq=0.2]score:"
-fit_content = true
 
 [node name="CountPanel" type="Panel" parent="CanvasLayer"]
 offset_left = 19.0
@@ -190,3 +156,38 @@ theme = SubResource("Theme_rq7eu")
 bbcode_enabled = true
 text = "1. Compare cubes on the scales
 2. Guess the weights"
+
+[node name="Floor" type="StaticBody2D" parent="."]
+position = Vector2(557, 595)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor"]
+shape = SubResource("WorldBoundaryShape2D_02jkl")
+
+[node name="ColorRect" type="ColorRect" parent="Floor"]
+offset_left = -578.0
+offset_right = 608.0
+offset_bottom = 57.0
+color = Color(0.14902, 0, 0.00784314, 1)
+
+[node name="Score" type="RichTextLabel" parent="Floor"]
+visible = false
+offset_left = -172.0
+offset_top = -9.0
+offset_right = 199.0
+offset_bottom = 69.0
+theme = SubResource("Theme_75p0t")
+theme_override_font_sizes/normal_font_size = 64
+bbcode_enabled = true
+text = "[wave][rainbow freq=0.2]score:"
+fit_content = true
+
+[node name="Scale" parent="." instance=ExtResource("2_2c80t")]
+position = Vector2(946, 505)
+
+[node name="Conveyer" parent="." instance=ExtResource("3_1lvot")]
+position = Vector2(34, 510)
+
+[node name="SpawnPoint" type="Node2D" parent="."]
+position = Vector2(-33, 463)
+
+[node name="Cubes" type="Node" parent="."]
