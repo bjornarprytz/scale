@@ -1,13 +1,15 @@
-extends VBoxContainer
+extends Panel
 class_name AnswerField
 
 
 var my_kind : ElementCube.Kind
 var is_submitting : bool
 
-@onready var text_edit : TextEdit = $H/TextEdit
-@onready var submit : Button = $H2/Submit
-@onready var clear : Button = $H2/Clear
+@onready var text_edit : TextEdit = $Answer/H/TextEdit
+@onready var submit : Button = $Answer/H2/Submit
+@onready var clear : Button = $Answer/H2/Clear
+@onready var sheen : ColorRect = $Answer/H2/Submit/Sheen
+@onready var color_cube : ColorRect = $Answer/H/CubeColor
 
 var editable: bool:
 	get:
@@ -42,7 +44,10 @@ func _submit():
 	
 	if (Autoload.submit_answer(my_kind, int(text_edit.text))):
 		submit.text = "Solved!"
-		tween.tween_property($H2/Submit/Sheen, "position:x", 150.0, 0.3)
+		tween.tween_property(self, "self_modulate", Color.WHITE, 0.08)
+		tween.set_parallel()
+		tween.tween_property(sheen, "position:x", 150.0, 0.3)
+		tween.tween_property(self, "self_modulate", Color.LAWN_GREEN, 0.5)
 		await tween.finished
 	else:
 		Autoload.purge.emit(my_kind)
@@ -83,5 +88,5 @@ func _on_text_input():
 		_submit()
 
 func set_kind(kind: ElementCube.Kind):
-	$H/ColorRect.color = kind.color
+	$Answer/H/CubeColor.modulate = kind.color
 	my_kind = kind

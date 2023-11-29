@@ -89,7 +89,7 @@ func _process(delta: float) -> void:
 		
 
 func _score_formula() -> int:
-	return float(MAX_SCORE - (elapsed * 10.0) - (Autoload.exploded_cubes * 1000.0)) / float(Autoload.wrong_answers +1)
+	return float(MAX_SCORE - (elapsed * 10.0) - (Autoload.exploded_cubes * 100.0)) / float(Autoload.wrong_answers +1)
 
 func _spawn_cube(kind: ElementCube.Kind):
 	var cube = cube_spawner.instantiate() as ElementCube

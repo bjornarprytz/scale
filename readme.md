@@ -16,7 +16,6 @@ Scales with two platforms to put cubes on
   - Shrapnel remains after explosion
   - Elements behave differently
   - Tweak the volatility
-  - Make them jiggle
 - Background
 
 ### Nice to have

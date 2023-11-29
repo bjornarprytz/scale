@@ -1,30 +1,58 @@
-[gd_scene load_steps=4 format=3 uid="uid://bqkl2fyr4no5r"]
+[gd_scene load_steps=5 format=3 uid="uid://bqkl2fyr4no5r"]
 
 [ext_resource type="FontFile" uid="uid://ck5dgaslygqp3" path="res://things/VT323-Regular.ttf" id="1_lolog"]
 [ext_resource type="Script" path="res://things/known.gd" id="1_pjv5l"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_85vmn"]
+bg_color = Color(0.32549, 0.678431, 0.564706, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.643137, 0.85098, 0.780392, 1)
 
 [sub_resource type="Theme" id="Theme_cqygd"]
 default_font = ExtResource("1_lolog")
 default_font_size = 48
 
-[node name="Known" type="VBoxContainer"]
+[node name="Panel" type="Panel"]
+custom_minimum_size = Vector2(0, 110)
+offset_top = 1.0
+offset_right = 154.0
+offset_bottom = 111.0
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_85vmn")
 script = ExtResource("1_pjv5l")
 
-[node name="H" type="HBoxContainer" parent="."]
+[node name="Known" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -62.0
+offset_top = -47.5
+offset_right = 62.0
+offset_bottom = 47.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="H" type="HBoxContainer" parent="Known"]
 layout_mode = 2
 
-[node name="ColorRect" type="ColorRect" parent="H"]
+[node name="ColorRect" type="ColorRect" parent="Known/H"]
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Known" type="RichTextLabel" parent="H"]
+[node name="Known" type="RichTextLabel" parent="Known/H"]
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 theme = SubResource("Theme_cqygd")
 text = "=5"
 
-[node name="Button" type="Button" parent="."]
+[node name="Button" type="Button" parent="Known"]
 modulate = Color(1, 0, 0, 1)
 custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
