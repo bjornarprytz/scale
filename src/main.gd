@@ -17,6 +17,7 @@ var elapsed := 0.0
 var focused_answer : RichTextLabel
 
 func _ready() -> void:
+	Autoload.reset()
 	Autoload.purge.connect(_purge)
 	Autoload.game_over.connect(_game_over)
 	
@@ -112,3 +113,14 @@ func _get_cube_count():
 func _update_cube_count():
 	$CanvasLayer/CountPanel/Count.clear()
 	$CanvasLayer/CountPanel/Count.append_text("[center]" + str(_get_cube_count()) + "/" + str(MAX_CUBES))
+
+
+func _on_button_button_down() -> void:
+	get_tree().reload_current_scene()
+
+
+func _on_texture_button_toggled(button_pressed: bool) -> void:
+	# Toggle music volume
+	
+	$Music.playing = !button_pressed
+		

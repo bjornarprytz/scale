@@ -87,7 +87,7 @@ func explode():
 
 func _make_shrapnel():
 	var shrapnel = shrapnel_spawner.instantiate() as Shrapnel
-	get_tree().root.add_child(shrapnel)
+	get_tree().root.call_deferred("add_child", shrapnel)
 	shrapnel.set_deferred("global_position", global_position)
 	shrapnel.set_deferred("modulate", kind.color)
 	shrapnel.call_deferred("apply_force", Vector2(randf_range(-1.0, 1.0), randf_range(-1.0, 0.0)) * randf_range(3000.0, 5000.0))

@@ -12,14 +12,13 @@ Scales with two platforms to put cubes on
 
 ## TODO
 
-- Restart Button
-- Cube Juice
-  - Shrapnel remains after explosion
-  - Tweak the volatility
-- Background
+- Sound
+  - Music
+  - Effects
+- Attribute
+  - Icons by Josy Dom Alexis from Pixabay
+  - Music by nojisuma from Pixabay
 
 ### Nice to have
 
-- Make cubes more visually interesting (shader magic?)
-- Music
 - Make it work on mobile

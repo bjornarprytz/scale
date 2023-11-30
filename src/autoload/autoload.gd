@@ -21,21 +21,12 @@ var possible_colors = [
 	Color.KHAKI
 ]
 
-func submit_answer(kind: ElementCube.Kind, answer: int) -> bool:
-	if (kind.weight == answer and correct_answers.find(kind) == -1):
-		correct_answers.push_back(kind)
-		correct_guess.emit(kind)
-		if (correct_answers.size() == kinds.size()):
-			game_over.emit(true)
-		return true
-	else:
-		wrong_answers += 1
+func reset():
+	kinds = []
+	correct_answers = []
+	wrong_answers = 0
+	exploded_cubes = 0
 	
-	return false
-
-
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
 	var chosen_weights = []
 	
 	for c in possible_colors:
@@ -49,9 +40,21 @@ func _ready() -> void:
 		kind.color = c
 		kind.weight = w
 		kind.stability = randi_range(15, 30)
-		kind.bounce = randf_range(0.0, 0.8)
+		kind.bounce = randf_range(0.0, 0.5)
 		
 		kinds.push_back(kind)
 	
 	print("Initiated ", kinds.size(), " kinds")
+
+func submit_answer(kind: ElementCube.Kind, answer: int) -> bool:
+	if (kind.weight == answer and correct_answers.find(kind) == -1):
+		correct_answers.push_back(kind)
+		correct_guess.emit(kind)
+		if (correct_answers.size() == kinds.size()):
+			game_over.emit(true)
+		return true
+	else:
+		wrong_answers += 1
+	
+	return false
 

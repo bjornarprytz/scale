@@ -1,9 +1,12 @@
-[gd_scene load_steps=11 format=3 uid="uid://bv8m51jf40i6k"]
+[gd_scene load_steps=17 format=3 uid="uid://bv8m51jf40i6k"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_860qy"]
 [ext_resource type="PackedScene" uid="uid://y0ij617emvpo" path="res://things/scale.tscn" id="2_2c80t"]
+[ext_resource type="Texture2D" uid="uid://dfmyi63mp6hbn" path="res://things/Factory background.png" id="2_ni5v5"]
 [ext_resource type="PackedScene" uid="uid://bx07aexvlsy62" path="res://things/conveyer.tscn" id="3_1lvot"]
+[ext_resource type="Texture2D" uid="uid://4a47icpx8ljl" path="res://things/sound.png" id="4_kecux"]
 [ext_resource type="FontFile" uid="uid://ck5dgaslygqp3" path="res://things/VT323-Regular.ttf" id="4_xs043"]
+[ext_resource type="Texture2D" uid="uid://duk4qc3fcbtp6" path="res://things/mute-1628277_1280.png" id="5_qeoi0"]
 
 [sub_resource type="Theme" id="Theme_75p0t"]
 default_font = ExtResource("4_xs043")
@@ -37,11 +40,49 @@ default_font_size = 1256
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_02jkl"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ijr3j"]
+bg_color = Color(0.152941, 0.529412, 0, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.603922, 0.584314, 0, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+shadow_size = 2
+shadow_offset = Vector2(2, 2)
+anti_aliasing = false
+
+[sub_resource type="Theme" id="Theme_b30bo"]
+default_font = ExtResource("4_xs043")
+default_font_size = 256
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xqrom"]
+bg_color = Color(0.494118, 0.870588, 0.984314, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.603922, 0.584314, 0, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+shadow_size = 2
+shadow_offset = Vector2(2, 2)
+anti_aliasing = false
+
 [node name="Game" type="Node2D"]
 script = ExtResource("1_860qy")
 
+[node name="FactoryBackground" type="Sprite2D" parent="."]
+position = Vector2(577, 308)
+texture = ExtResource("2_ni5v5")
+
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
-layer = -1
+layer = 0
 
 [node name="Control" type="Control" parent="CanvasLayer"]
 layout_mode = 3
@@ -183,6 +224,44 @@ bbcode_enabled = true
 text = "[wave][rainbow freq=0.2]score:"
 fit_content = true
 
+[node name="Panel" type="Panel" parent="Floor"]
+offset_left = 452.0
+offset_top = 6.0
+offset_right = 589.0
+offset_bottom = 47.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_ijr3j")
+
+[node name="Button" type="Button" parent="Floor/Panel"]
+modulate = Color(0.411765, 0.85098, 0.215686, 1)
+layout_mode = 0
+offset_left = 2.0
+offset_top = 2.0
+offset_right = 1332.0
+offset_bottom = 372.0
+scale = Vector2(0.1, 0.1)
+theme = SubResource("Theme_b30bo")
+text = "RESTART"
+metadata/_edit_lock_ = true
+
+[node name="Panel2" type="Panel" parent="Floor"]
+offset_left = -549.0
+offset_top = 6.0
+offset_right = -509.0
+offset_bottom = 47.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_xqrom")
+
+[node name="TextureButton" type="TextureButton" parent="Floor/Panel2"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 9.0
+offset_right = 34.0
+offset_bottom = 32.0
+toggle_mode = true
+texture_normal = ExtResource("4_kecux")
+texture_pressed = ExtResource("5_qeoi0")
+ignore_texture_size = true
+stretch_mode = 0
+
 [node name="Scale" parent="." instance=ExtResource("2_2c80t")]
 position = Vector2(946, 505)
 
@@ -193,3 +272,11 @@ position = Vector2(34, 510)
 position = Vector2(-33, 463)
 
 [node name="Cubes" type="Node" parent="."]
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+
+[node name="Effects" type="AudioStreamPlayer" parent="."]
+max_polyphony = 4
+
+[connection signal="button_down" from="Floor/Panel/Button" to="." method="_on_button_button_down"]
+[connection signal="toggled" from="Floor/Panel2/TextureButton" to="." method="_on_texture_button_toggled"]

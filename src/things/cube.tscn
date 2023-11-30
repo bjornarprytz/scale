@@ -29,6 +29,36 @@ offset_right = 20.0
 offset_bottom = 20.0
 mouse_filter = 2
 
+[node name="Border" type="ColorRect" parent="Color"]
+offset_right = 2.0
+offset_bottom = 40.0
+mouse_filter = 2
+color = Color(0.321569, 0.321569, 0.321569, 1)
+
+[node name="Border2" type="ColorRect" parent="Color"]
+offset_left = 38.0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2
+color = Color(0.321569, 0.321569, 0.321569, 1)
+
+[node name="Border3" type="ColorRect" parent="Color"]
+offset_top = 2.0
+offset_right = 2.0
+offset_bottom = 42.0
+rotation = -1.57079
+mouse_filter = 2
+color = Color(0.321569, 0.321569, 0.321569, 1)
+
+[node name="Border4" type="ColorRect" parent="Color"]
+offset_left = 40.0
+offset_top = 38.0
+offset_right = 42.0
+offset_bottom = 78.0
+rotation = 1.57079
+mouse_filter = 2
+color = Color(0.321569, 0.321569, 0.321569, 1)
+
 [node name="Shape" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_xcpp7")
 
