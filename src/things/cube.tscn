@@ -30,12 +30,14 @@ offset_bottom = 20.0
 mouse_filter = 2
 
 [node name="Border" type="ColorRect" parent="Color"]
+layout_mode = 0
 offset_right = 2.0
 offset_bottom = 40.0
 mouse_filter = 2
 color = Color(0.321569, 0.321569, 0.321569, 1)
 
 [node name="Border2" type="ColorRect" parent="Color"]
+layout_mode = 0
 offset_left = 38.0
 offset_right = 40.0
 offset_bottom = 40.0
@@ -43,6 +45,7 @@ mouse_filter = 2
 color = Color(0.321569, 0.321569, 0.321569, 1)
 
 [node name="Border3" type="ColorRect" parent="Color"]
+layout_mode = 0
 offset_top = 2.0
 offset_right = 2.0
 offset_bottom = 42.0
@@ -51,6 +54,7 @@ mouse_filter = 2
 color = Color(0.321569, 0.321569, 0.321569, 1)
 
 [node name="Border4" type="ColorRect" parent="Color"]
+layout_mode = 0
 offset_left = 40.0
 offset_top = 38.0
 offset_right = 42.0
@@ -107,6 +111,8 @@ visible = false
 scale = Vector2(2.5, 2.5)
 energy = 0.5
 texture = ExtResource("3_2dnhe")
+
+[node name="Effect" type="AudioStreamPlayer2D" parent="."]
 
 [connection signal="body_entered" from="." to="." method="_on_RigidBody2D_body_entered"]
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]

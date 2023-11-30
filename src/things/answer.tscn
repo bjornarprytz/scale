@@ -83,3 +83,5 @@ modulate = Color(1, 0, 0, 1)
 custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
 text = "X"
+
+[node name="Effect" type="AudioStreamPlayer2D" parent="."]

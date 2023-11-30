@@ -9,7 +9,7 @@ var SPAWN_TIME := 2.0
 @onready var known_spawner = preload("res://things/known.tscn")
 
 @onready var spawn_point : Node2D = $SpawnPoint
-@onready var info : GridContainer = $CanvasLayer/Control/AnswerGrid
+@onready var info : GridContainer = $UIBack/Control/AnswerGrid
 
 var won : bool
 var t := 0.0
@@ -50,17 +50,21 @@ func _game_over(win: bool):
 	
 	if (win):
 		SPAWN_TIME = 0.5
-		$CanvasLayer/Instructions.visible = false
-		$CanvasLayer/WinText.visible = true
-		$Floor/Score.visible = true
-		$Floor/Score.append_text(str(_score_formula()))
+		$UIBack/Instructions.visible = false
+		$UIBack/WinText.visible = true
+		$UIFore/Score.visible = true
+		$UIFore/Restart.visible = true
+		$UIFore/Score.append_text(str(_score_formula()))
+		
+		var tween = create_tween()
+		tween.tween_property($UIFore/Credits, "position:y", -900, 10.0)
 
 func _shortcut_input(event: InputEvent) -> void:
 	
 	if (event.keycode == KEY_TAB):
 		var first : AnswerField
 		var previous : AnswerField
-		for a in $CanvasLayer/Control/AnswerGrid.get_children():
+		for a in $UIBack/Control/AnswerGrid.get_children():
 			if !(a is AnswerField) or !a.editable:
 				continue
 			var answer_field = a as AnswerField
@@ -111,8 +115,8 @@ func _get_cube_count():
 	return count
 
 func _update_cube_count():
-	$CanvasLayer/CountPanel/Count.clear()
-	$CanvasLayer/CountPanel/Count.append_text("[center]" + str(_get_cube_count()) + "/" + str(MAX_CUBES))
+	$UIBack/CountPanel/Count.clear()
+	$UIBack/CountPanel/Count.append_text("[center]" + str(_get_cube_count()) + "/" + str(MAX_CUBES))
 
 
 func _on_button_button_down() -> void:
@@ -120,7 +124,5 @@ func _on_button_button_down() -> void:
 
 
 func _on_texture_button_toggled(button_pressed: bool) -> void:
-	# Toggle music volume
-	
 	$Music.playing = !button_pressed
-		
+

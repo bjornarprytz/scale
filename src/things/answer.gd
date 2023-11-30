@@ -11,6 +11,9 @@ var is_submitting : bool
 @onready var sheen : ColorRect = $Answer/H2/Submit/Sheen
 @onready var color_cube : ColorRect = $Answer/H/CubeColor
 
+@onready var correct_effect = preload("res://things/correct-2-46134.mp3")
+@onready var wrong_effect = preload("res://things/wrong-47985.mp3")
+
 var editable: bool:
 	get:
 		return text_edit.editable
@@ -48,13 +51,16 @@ func _submit():
 		tween.set_parallel()
 		tween.tween_property(sheen, "position:x", 150.0, 0.3)
 		tween.tween_property(self, "self_modulate", Color.LAWN_GREEN, 0.5)
+		$Effect.stream = correct_effect
+		$Effect.play()
 		await tween.finished
 	else:
 		Autoload.purge.emit(my_kind)
 		
 		var penalty = float((Autoload.wrong_answers)) * 5.0
 		tween.tween_method(_set_submit_text_countdown, penalty, 0.0, penalty)
-		
+		$Effect.stream = wrong_effect
+		$Effect.play()
 		await tween.finished
 		text_edit.editable = true
 		text_edit.clear()

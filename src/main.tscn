@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://bv8m51jf40i6k"]
+[gd_scene load_steps=20 format=3 uid="uid://bv8m51jf40i6k"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_860qy"]
 [ext_resource type="PackedScene" uid="uid://y0ij617emvpo" path="res://things/scale.tscn" id="2_2c80t"]
@@ -7,6 +7,8 @@
 [ext_resource type="Texture2D" uid="uid://4a47icpx8ljl" path="res://things/sound.png" id="4_kecux"]
 [ext_resource type="FontFile" uid="uid://ck5dgaslygqp3" path="res://things/VT323-Regular.ttf" id="4_xs043"]
 [ext_resource type="Texture2D" uid="uid://duk4qc3fcbtp6" path="res://things/mute-1628277_1280.png" id="5_qeoi0"]
+[ext_resource type="AudioStream" uid="uid://djba3x06rt5uq" path="res://things/nightisthebeginning - 02.04.2023, 12.27.wav" id="8_7xhe6"]
+[ext_resource type="Script" path="res://Music.gd" id="9_cibvk"]
 
 [sub_resource type="Theme" id="Theme_75p0t"]
 default_font = ExtResource("4_xs043")
@@ -74,6 +76,10 @@ shadow_size = 2
 shadow_offset = Vector2(2, 2)
 anti_aliasing = false
 
+[sub_resource type="Theme" id="Theme_5d002"]
+default_font = ExtResource("4_xs043")
+default_font_size = 128
+
 [node name="Game" type="Node2D"]
 script = ExtResource("1_860qy")
 
@@ -81,16 +87,16 @@ script = ExtResource("1_860qy")
 position = Vector2(577, 308)
 texture = ExtResource("2_ni5v5")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="UIBack" type="CanvasLayer" parent="."]
 layer = 0
 
-[node name="Control" type="Control" parent="CanvasLayer"]
+[node name="Control" type="Control" parent="UIBack"]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 1153.0
 offset_bottom = 186.0
 
-[node name="AnswerGrid" type="GridContainer" parent="CanvasLayer/Control"]
+[node name="AnswerGrid" type="GridContainer" parent="UIBack/Control"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -100,7 +106,7 @@ grow_vertical = 2
 theme_override_constants/h_separation = -1
 columns = 8
 
-[node name="WinText" type="RichTextLabel" parent="CanvasLayer"]
+[node name="WinText" type="RichTextLabel" parent="UIBack"]
 visible = false
 offset_left = 400.0
 offset_top = 183.0
@@ -110,14 +116,14 @@ theme = SubResource("Theme_75p0t")
 bbcode_enabled = true
 text = "[wave][rainbow freq=0.2]WIN"
 
-[node name="CountPanel" type="Panel" parent="CanvasLayer"]
+[node name="CountPanel" type="Panel" parent="UIBack"]
 offset_left = 19.0
 offset_top = 379.0
 offset_right = 160.0
 offset_bottom = 449.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_hnbky")
 
-[node name="Count" type="RichTextLabel" parent="CanvasLayer/CountPanel"]
+[node name="Count" type="RichTextLabel" parent="UIBack/CountPanel"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -135,7 +141,7 @@ theme = SubResource("Theme_h8kd7")
 bbcode_enabled = true
 text = "[center]20/20"
 
-[node name="Text" type="RichTextLabel" parent="CanvasLayer/CountPanel"]
+[node name="Text" type="RichTextLabel" parent="UIBack/CountPanel"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -154,7 +160,7 @@ theme_override_font_sizes/normal_font_size = 128
 bbcode_enabled = true
 text = "[center]Limit"
 
-[node name="ColorRect4" type="Panel" parent="CanvasLayer/CountPanel"]
+[node name="ColorRect4" type="Panel" parent="UIBack/CountPanel"]
 layout_mode = 0
 offset_left = 5.0
 offset_top = 59.0
@@ -162,7 +168,7 @@ offset_right = 11.0
 offset_bottom = 65.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_xv6ol")
 
-[node name="ColorRect3" type="Panel" parent="CanvasLayer/CountPanel"]
+[node name="ColorRect3" type="Panel" parent="UIBack/CountPanel"]
 layout_mode = 0
 offset_left = 130.0
 offset_top = 59.0
@@ -170,7 +176,7 @@ offset_right = 136.0
 offset_bottom = 65.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_xv6ol")
 
-[node name="ColorRect2" type="Panel" parent="CanvasLayer/CountPanel"]
+[node name="ColorRect2" type="Panel" parent="UIBack/CountPanel"]
 layout_mode = 0
 offset_left = 130.0
 offset_top = 5.0
@@ -178,7 +184,7 @@ offset_right = 136.0
 offset_bottom = 11.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_xv6ol")
 
-[node name="ColorRect" type="Panel" parent="CanvasLayer/CountPanel"]
+[node name="ColorRect" type="Panel" parent="UIBack/CountPanel"]
 layout_mode = 0
 offset_left = 5.0
 offset_top = 5.0
@@ -186,12 +192,12 @@ offset_right = 11.0
 offset_bottom = 11.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_xv6ol")
 
-[node name="Instructions" type="RichTextLabel" parent="CanvasLayer"]
-modulate = Color(1, 1, 1, 0.321569)
-offset_left = 212.0
-offset_top = 187.0
-offset_right = 15432.0
-offset_bottom = 2847.0
+[node name="Instructions" type="RichTextLabel" parent="UIBack"]
+modulate = Color(1, 1, 0.513726, 0.67451)
+offset_left = 202.0
+offset_top = 264.0
+offset_right = 15422.0
+offset_bottom = 2924.0
 scale = Vector2(0.05, 0.05)
 theme = SubResource("Theme_rq7eu")
 bbcode_enabled = true
@@ -212,26 +218,17 @@ offset_right = 608.0
 offset_bottom = 57.0
 color = Color(0.14902, 0, 0.00784314, 1)
 
-[node name="Score" type="RichTextLabel" parent="Floor"]
-visible = false
-offset_left = -172.0
-offset_top = -9.0
-offset_right = 199.0
-offset_bottom = 69.0
-theme = SubResource("Theme_75p0t")
-theme_override_font_sizes/normal_font_size = 64
-bbcode_enabled = true
-text = "[wave][rainbow freq=0.2]score:"
-fit_content = true
+[node name="UIFore" type="CanvasLayer" parent="."]
 
-[node name="Panel" type="Panel" parent="Floor"]
-offset_left = 452.0
-offset_top = 6.0
-offset_right = 589.0
-offset_bottom = 47.0
+[node name="Restart" type="Panel" parent="UIFore"]
+visible = false
+offset_left = 1009.0
+offset_top = 601.0
+offset_right = 1146.0
+offset_bottom = 642.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_ijr3j")
 
-[node name="Button" type="Button" parent="Floor/Panel"]
+[node name="Button" type="Button" parent="UIFore/Restart"]
 modulate = Color(0.411765, 0.85098, 0.215686, 1)
 layout_mode = 0
 offset_left = 2.0
@@ -243,14 +240,14 @@ theme = SubResource("Theme_b30bo")
 text = "RESTART"
 metadata/_edit_lock_ = true
 
-[node name="Panel2" type="Panel" parent="Floor"]
-offset_left = -549.0
-offset_top = 6.0
-offset_right = -509.0
-offset_bottom = 47.0
+[node name="ToggleMusic" type="Panel" parent="UIFore"]
+offset_left = 8.0
+offset_top = 601.0
+offset_right = 48.0
+offset_bottom = 642.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_xqrom")
 
-[node name="TextureButton" type="TextureButton" parent="Floor/Panel2"]
+[node name="TextureButton" type="TextureButton" parent="UIFore/ToggleMusic"]
 layout_mode = 0
 offset_left = 8.0
 offset_top = 9.0
@@ -261,6 +258,38 @@ texture_normal = ExtResource("4_kecux")
 texture_pressed = ExtResource("5_qeoi0")
 ignore_texture_size = true
 stretch_mode = 0
+
+[node name="Score" type="RichTextLabel" parent="UIFore"]
+visible = false
+offset_left = 372.0
+offset_top = 586.0
+offset_right = 743.0
+offset_bottom = 664.0
+theme = SubResource("Theme_75p0t")
+theme_override_font_sizes/normal_font_size = 64
+bbcode_enabled = true
+text = "[wave][rainbow freq=0.2]score:"
+fit_content = true
+
+[node name="Credits" type="RichTextLabel" parent="UIFore"]
+offset_left = 42.0
+offset_top = 720.0
+offset_right = 1604.0
+offset_bottom = 2182.0
+scale = Vector2(0.5, 0.5)
+theme = SubResource("Theme_5d002")
+bbcode_enabled = true
+text = "[rainbow]Credits[/rainbow]
+
+
+[wave freq=10.0 amp=30]Music by KBHMF[/wave]
+
+
+
+From Pixabay:
+- Icons by Josy Dom Alexis
+- Sound Effects from Pixabay
+- Sound Effect by Charlie Raven"
 
 [node name="Scale" parent="." instance=ExtResource("2_2c80t")]
 position = Vector2(946, 505)
@@ -274,9 +303,9 @@ position = Vector2(-33, 463)
 [node name="Cubes" type="Node" parent="."]
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_7xhe6")
+autoplay = true
+script = ExtResource("9_cibvk")
 
-[node name="Effects" type="AudioStreamPlayer" parent="."]
-max_polyphony = 4
-
-[connection signal="button_down" from="Floor/Panel/Button" to="." method="_on_button_button_down"]
-[connection signal="toggled" from="Floor/Panel2/TextureButton" to="." method="_on_texture_button_toggled"]
+[connection signal="button_down" from="UIFore/Restart/Button" to="." method="_on_button_button_down"]
+[connection signal="toggled" from="UIFore/ToggleMusic/TextureButton" to="." method="_on_texture_button_toggled"]

@@ -26,6 +26,7 @@ var kind : Kind:
 @onready var boom : CPUParticles2D = $Explosion
 @onready var shape : CollisionShape2D = $Shape
 @onready var light : PointLight2D = $Light
+@onready var break_effects = [preload("res://things/glass-breaking-93803.mp3"), preload("res://things/glass-shatter-3-100155.mp3")]
 
 var prev_pos : Vector2
 var momentum : Vector2
@@ -74,6 +75,10 @@ func explode():
 	
 	$Color.visible = false
 	$Weight.visible = false
+	$Effect.stream = break_effects.pick_random()
+	$Effect.pitch_scale = randf_range(0.9, 1.1)
+	$Effect.play()
+	
 	set_deferred("freeze", true)
 	shape.set_deferred("disabled", true)
 	

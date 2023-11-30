@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://djba3x06rt5uq"
+path="res://.godot/imported/nightisthebeginning - 02.04.2023, 12.27.wav-230f67d8e147f739be75878f45eac4dc.sample"
+
+[deps]
+
+source_file="res://things/nightisthebeginning - 02.04.2023, 12.27.wav"
+dest_files=["res://.godot/imported/nightisthebeginning - 02.04.2023, 12.27.wav-230f67d8e147f739be75878f45eac4dc.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0
