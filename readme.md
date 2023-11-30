@@ -12,6 +12,7 @@ Scales with two platforms to put cubes on
 
 ## TODO
 
+- Restart Button
 - Cube Juice
   - Shrapnel remains after explosion
   - Tweak the volatility

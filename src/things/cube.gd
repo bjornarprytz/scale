@@ -22,6 +22,7 @@ var kind : Kind:
 		else:
 			Autoload.correct_guess.connect(_check_correct)
 
+@onready var shrapnel_spawner = preload("res://things/shrapnel.tscn")
 @onready var boom : CPUParticles2D = $Explosion
 @onready var shape : CollisionShape2D = $Shape
 @onready var light : PointLight2D = $Light
@@ -64,7 +65,13 @@ func _on_RigidBody2D_body_entered(body: Node):
 		apply_damage(damage)
 
 func explode():
+	if (has_exploded):
+		return
 	has_exploded = true
+	
+	for n in randi_range(1, 4):
+		_make_shrapnel()
+	
 	$Color.visible = false
 	$Weight.visible = false
 	set_deferred("freeze", true)
@@ -77,6 +84,14 @@ func explode():
 	await get_tree().create_timer(boom.lifetime).timeout
 	
 	queue_free()
+
+func _make_shrapnel():
+	var shrapnel = shrapnel_spawner.instantiate() as Shrapnel
+	get_tree().root.add_child(shrapnel)
+	shrapnel.set_deferred("global_position", global_position)
+	shrapnel.set_deferred("modulate", kind.color)
+	shrapnel.call_deferred("apply_force", Vector2(randf_range(-1.0, 1.0), randf_range(-1.0, 0.0)) * randf_range(3000.0, 5000.0))
+	shrapnel.call_deferred("apply_torque", randf() * 200.0)
 
 func apply_damage(amount):
 	if (amount > 30):
