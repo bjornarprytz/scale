@@ -96,15 +96,12 @@ anchors_preset = 0
 offset_right = 1153.0
 offset_bottom = 186.0
 
-[node name="AnswerGrid" type="GridContainer" parent="UIBack/Control"]
+[node name="AnswerGrid" type="HBoxContainer" parent="UIBack/Control"]
 layout_mode = 1
-anchors_preset = 15
+anchors_preset = 10
 anchor_right = 1.0
-anchor_bottom = 1.0
 grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/h_separation = -1
-columns = 8
+theme_override_constants/separation = -1
 
 [node name="WinText" type="RichTextLabel" parent="UIBack"]
 visible = false
@@ -288,7 +285,9 @@ text = "[rainbow]Credits[/rainbow]
 
 From Pixabay:
 - Icons by Josy Dom Alexis
-- Sound Effects from Pixabay
+- Icons by Jan
+- Icons by OpenClipart-Vectors
+- Sound Effects from Pixabay themselves
 - Sound Effect by Charlie Raven"
 
 [node name="Scale" parent="." instance=ExtResource("2_2c80t")]

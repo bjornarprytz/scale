@@ -59,6 +59,7 @@ clip_contents = true
 custom_minimum_size = Vector2(90, 120)
 offset_right = 90.0
 offset_bottom = 120.0
+size_flags_horizontal = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_bey85")
 script = ExtResource("1_rjccp")
 

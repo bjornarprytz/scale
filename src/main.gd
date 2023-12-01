@@ -1,14 +1,14 @@
 extends Node2D
 
 const MAX_SCORE := 69000
-const MAX_CUBES := 20
+const MAX_CUBES := 25
 var SPAWN_TIME := 2.0
 
 @onready var cube_spawner = preload("res://things/cube.tscn")
 @onready var answer_spawner = preload("res://things/answer.tscn")
 
 @onready var spawn_point : Node2D = $SpawnPoint
-@onready var info : GridContainer = $UIBack/Control/AnswerGrid
+@onready var info : HBoxContainer = $UIBack/Control/AnswerGrid
 
 var won : bool
 var t := 0.0
@@ -19,6 +19,8 @@ func _ready() -> void:
 	Autoload.reset()
 	Autoload.purge.connect(_purge)
 	Autoload.game_over.connect(_game_over)
+	
+	$UIBack/Instructions.append_text(" (" + str(Autoload.MIN_WEIGHT) + "-" + str(Autoload.MAX_WEIGHT) +")")
 	
 	var known_info = Autoload.kinds.pick_random()
 	
