@@ -56,7 +56,7 @@ func _game_over(win: bool):
 		$UIFore/Score.append_text(str(_score_formula()))
 		
 		var tween = create_tween()
-		tween.tween_property($UIFore/Credits, "position:y", -900, 10.0)
+		tween.tween_property($UIFore/Credits, "position:y", -1000, 10.0)
 
 func _shortcut_input(event: InputEvent) -> void:
 	if (event.keycode == KEY_TAB):

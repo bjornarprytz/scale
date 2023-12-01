@@ -271,8 +271,8 @@ fit_content = true
 [node name="Credits" type="RichTextLabel" parent="UIFore"]
 offset_left = 42.0
 offset_top = 720.0
-offset_right = 1604.0
-offset_bottom = 2182.0
+offset_right = 2000.0
+offset_bottom = 2452.0
 scale = Vector2(0.5, 0.5)
 theme = SubResource("Theme_5d002")
 bbcode_enabled = true
