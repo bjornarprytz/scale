@@ -57,4 +57,22 @@ func submit_answer(kind: ElementCube.Kind, answer: int) -> bool:
 		wrong_answers += 1
 	
 	return false
+	
+static func get_contrast(c : Color) -> Color:
+	var red = c.r
+	var green = c.g
+	var blue = c.b
+	var alpha = c.a
+	
+	# Convert red, green, and blue to relative luminance
+	var relative_luminance = 0.2126 * red + 0.7152 * green + 0.0722 * blue
+	
+	# Determine if the contrast color should be light or dark
+	var contrast_color: Color
+	if relative_luminance > 0.5:
+		contrast_color = Color(0, 0, 0, alpha)
+	else:
+		contrast_color = Color(1, 1, 1, alpha)
+	
+	return contrast_color
 

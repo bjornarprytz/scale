@@ -42,7 +42,7 @@ func _check_correct(guessed_kind: ElementCube.Kind):
 func _reveal_weight():
 	$Weight.clear()
 	$Weight.append_text("[center]"+str(kind.weight))
-	$Weight.modulate = _get_contrast(kind.color)
+	$Weight.modulate = Autoload.get_contrast(kind.color)
 
 func _physics_process(delta: float) -> void:
 	var vp_rect = get_viewport_rect().grow(60.0)
@@ -127,22 +127,3 @@ func _on_mouse_entered() -> void:
 func _on_mouse_exited() -> void:
 	hovered = false
 	light.visible = false
-	
-func _get_contrast(c : Color) -> Color:
-	var red = c.r
-	var green = c.g
-	var blue = c.b
-	var alpha = c.a
-	
-	# Convert red, green, and blue to relative luminance
-	var relative_luminance = 0.2126 * red + 0.7152 * green + 0.0722 * blue
-	
-	# Determine if the contrast color should be light or dark
-	var contrast_color: Color
-	if relative_luminance > 0.5:
-		contrast_color = Color(0, 0, 0, alpha)
-	else:
-		contrast_color = Color(1, 1, 1, alpha)
-	
-	return contrast_color
-

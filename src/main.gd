@@ -6,7 +6,6 @@ var SPAWN_TIME := 2.0
 
 @onready var cube_spawner = preload("res://things/cube.tscn")
 @onready var answer_spawner = preload("res://things/answer.tscn")
-@onready var known_spawner = preload("res://things/known.tscn")
 
 @onready var spawn_point : Node2D = $SpawnPoint
 @onready var info : GridContainer = $UIBack/Control/AnswerGrid
@@ -22,11 +21,9 @@ func _ready() -> void:
 	Autoload.game_over.connect(_game_over)
 	
 	var known_info = Autoload.kinds.pick_random()
-	Autoload.submit_answer(known_info, known_info.weight)
 	
-	var kn = known_spawner.instantiate()
-	kn.set_kind(known_info)
-	
+	var kn = answer_spawner.instantiate() as AnswerField
+	kn.set_kind(known_info, true)
 	info.add_child(kn)
 	
 	for k in Autoload.kinds:
@@ -60,27 +57,21 @@ func _game_over(win: bool):
 		tween.tween_property($UIFore/Credits, "position:y", -900, 10.0)
 
 func _shortcut_input(event: InputEvent) -> void:
-	
 	if (event.keycode == KEY_TAB):
 		var first : AnswerField
-		var previous : AnswerField
 		for a in $UIBack/Control/AnswerGrid.get_children():
 			if !(a is AnswerField) or !a.editable:
 				continue
 			var answer_field = a as AnswerField
+			if (answer_field.focus):
+				return
 			
 			if first == null:
 				first = answer_field
-			
-			if (previous != null and previous.focus):
-				answer_field.focus = true
-				return
-			
-			previous = answer_field
 		
 		first.focus = true
 
-func _process(delta: float) -> void:
+func _process(delta: float) -> void:	
 	t += delta
 	elapsed += delta
 	
