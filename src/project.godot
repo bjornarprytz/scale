@@ -22,6 +22,7 @@ Autoload="*res://autoload/autoload.tscn"
 [display]
 
 window/size/resizable=false
+window/stretch/mode="viewport"
 
 [rendering]
 
