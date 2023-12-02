@@ -2,14 +2,16 @@ extends Node2D
 class_name Global
 
 const NUM_ELEMENTS = 10
-const MAX_WEIGHT = 20
-const MIN_WEIGHT = 2
+const MAX_WEIGHT = 16
+const MIN_WEIGHT = 1
+const PENALTY_CAP = 15.0
 
 signal purge(kind: ElementCube.Kind)
 signal correct_guess(kind: ElementCube.Kind)
 signal game_over(won: bool)
 
 var kinds : Array[ElementCube.Kind] = []
+var unsolved_elements : Array[ElementCube.Kind] = []
 var correct_answers: Array[ElementCube.Kind] = []
 var wrong_answers := 0
 var exploded_cubes := 0
@@ -19,6 +21,7 @@ var possible_colors = _generate_contrast_palette()
 func reset():
 	kinds = []
 	correct_answers = []
+	unsolved_elements = []
 	wrong_answers = 0
 	exploded_cubes = 0
 	
@@ -38,8 +41,12 @@ func reset():
 		kind.bounce = randf_range(0.0, 0.4)
 		
 		kinds.push_back(kind)
+		unsolved_elements.push_back(kind)
 	
 	print("Initiated ", kinds.size(), " kinds")
+
+func get_penalty():
+	return min(float((Autoload.wrong_answers)) * 5.0, Autoload.PENALTY_CAP)
 
 func submit_answer(kind: ElementCube.Kind, answer: int) -> bool:
 	if (kind.weight == answer and correct_answers.find(kind) == -1):
@@ -47,6 +54,7 @@ func submit_answer(kind: ElementCube.Kind, answer: int) -> bool:
 		correct_guess.emit(kind)
 		if (correct_answers.size() == kinds.size()):
 			game_over.emit(true)
+		unsolved_elements.erase(kind)
 		return true
 	else:
 		wrong_answers += 1

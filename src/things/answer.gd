@@ -75,10 +75,9 @@ func _submit(text: String):
 		Autoload.purge.emit(my_kind)
 		
 		$Answer/H2/Submit/Icon.visible = false
-		var penalty = float((Autoload.wrong_answers)) * 5.0
 		cooldown.value = 100
 		cooldown.visible = true
-		tween.tween_property(cooldown, "value", 0, penalty)
+		tween.tween_property(cooldown, "value", 0, Autoload.get_penalty())
 		$Effect.stream = wrong_effect
 		$Effect.play()
 		await tween.finished

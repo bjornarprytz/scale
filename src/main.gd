@@ -79,15 +79,19 @@ func _process(delta: float) -> void:
 	
 	if (t > SPAWN_TIME):
 		t = 0.0
-		if (_get_cube_count() < MAX_CUBES):
-			_spawn_cube(Autoload.kinds.pick_random())
+		var nCubes = _get_cube_count()
+		if (nCubes < MAX_CUBES):
+			if (nCubes >= MAX_CUBES - 2 and Autoload.unsolved_elements.size() > 0):
+				_spawn_cube(Autoload.unsolved_elements.pick_random())
+			else:
+				_spawn_cube(Autoload.kinds.pick_random())
 		if (won):
 			for c in $Cubes.get_children():
 				c.apply_force(Vector2(randf_range(-1.0, 1.0), randf_range(-1.0, 0.0)) * randf_range(30000.0, 50000.0))
 		
 
 func _score_formula() -> int:
-	return float(MAX_SCORE - (elapsed * 10.0) - (Autoload.exploded_cubes * 100.0)) / float(Autoload.wrong_answers +1)
+	return float(MAX_SCORE - (elapsed * 100.0) + (Autoload.exploded_cubes * 100.0))
 
 func _spawn_cube(kind: ElementCube.Kind):
 	var cube = cube_spawner.instantiate() as ElementCube

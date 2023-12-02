@@ -191,11 +191,12 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_xv6ol")
 
 [node name="Instructions" type="RichTextLabel" parent="UIBack"]
 modulate = Color(1, 1, 0.513726, 0.67451)
-offset_left = 202.0
+offset_left = 215.0
 offset_top = 264.0
-offset_right = 15422.0
+offset_right = 15435.0
 offset_bottom = 2924.0
 scale = Vector2(0.05, 0.05)
+mouse_filter = 2
 theme = SubResource("Theme_rq7eu")
 bbcode_enabled = true
 text = "1. Compare cubes on the scales
