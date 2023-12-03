@@ -273,7 +273,7 @@ fit_content = true
 offset_left = 42.0
 offset_top = 720.0
 offset_right = 2000.0
-offset_bottom = 2452.0
+offset_bottom = 2540.0
 scale = Vector2(0.5, 0.5)
 theme = SubResource("Theme_5d002")
 bbcode_enabled = true
@@ -288,6 +288,7 @@ From Pixabay:
 - Icons by Josy Dom Alexis
 - Icons by Jan
 - Icons by OpenClipart-Vectors
+- Icon by Samuel1983
 - Sound Effects from Pixabay themselves
 - Sound Effect by Charlie Raven"
 

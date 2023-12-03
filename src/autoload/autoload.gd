@@ -1,8 +1,7 @@
 extends Node2D
 class_name Global
 
-const NUM_ELEMENTS = 10
-const MAX_WEIGHT = 16
+const MAX_WEIGHT = 12
 const MIN_WEIGHT = 1
 const PENALTY_CAP = 15.0
 
@@ -88,10 +87,6 @@ static func _generate_contrast_palette() -> Array[Color]:
 		Color.from_string("FFFF00", Color.DEEP_PINK),
 		Color.from_string("FF00FF", Color.DEEP_PINK),
 		Color.from_string("00FFFF", Color.DEEP_PINK),
-		Color.from_string("FFA500", Color.DEEP_PINK),
-		Color.from_string("008000", Color.DEEP_PINK),
-		Color.from_string("800080", Color.DEEP_PINK),
-		Color.from_string("FFD700", Color.DEEP_PINK),
-		Color.from_string("008080", Color.DEEP_PINK),
-		Color.from_string("FF4500", Color.DEEP_PINK)
+		Color.from_string("000000", Color.DEEP_PINK),
+		Color.from_string("FFFFFF", Color.DEEP_PINK),
 	]

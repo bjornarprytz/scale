@@ -1,0 +1,67 @@
+[gd_scene format=3 uid="uid://d0wbyglqtv2lk"]
+
+[node name="Panel" type="Panel"]
+offset_right = 254.0
+offset_bottom = 138.0
+
+[node name="SettingsMenu" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -11.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Element" type="HBoxContainer" parent="SettingsMenu"]
+layout_mode = 2
+
+[node name="ElementTypes" type="RichTextLabel" parent="SettingsMenu/Element"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Element Types"
+fit_content = true
+
+[node name="Count" type="RichTextLabel" parent="SettingsMenu/Element"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "10"
+
+[node name="ElementTypesSlider" type="HSlider" parent="SettingsMenu"]
+layout_mode = 2
+min_value = 5.0
+max_value = 12.0
+value = 10.0
+
+[node name="Weight" type="HBoxContainer" parent="SettingsMenu"]
+layout_mode = 2
+
+[node name="WeightRange" type="RichTextLabel" parent="SettingsMenu/Weight"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Weight Range
+"
+fit_content = true
+autowrap_mode = 0
+
+[node name="Range" type="RichTextLabel" parent="SettingsMenu/Weight"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "1-16"
+fit_content = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="SettingsMenu"]
+layout_mode = 2
+
+[node name="WeightRangeSlider" type="HSlider" parent="SettingsMenu/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="WeightRangeSlider2" type="HSlider" parent="SettingsMenu/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Button" type="Button" parent="SettingsMenu"]
+layout_mode = 2
+text = "Ok"
+flat = true
