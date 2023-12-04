@@ -81,12 +81,12 @@ static func get_contrast(c : Color) -> Color:
 
 static func _generate_contrast_palette() -> Array[Color]:
 	return [
-		Color.from_string("FF0000", Color.DEEP_PINK),
-		Color.from_string("00FF00", Color.DEEP_PINK),
-		Color.from_string("0000FF", Color.DEEP_PINK),
-		Color.from_string("FFFF00", Color.DEEP_PINK),
-		Color.from_string("FF00FF", Color.DEEP_PINK),
-		Color.from_string("00FFFF", Color.DEEP_PINK),
-		Color.from_string("000000", Color.DEEP_PINK),
-		Color.from_string("FFFFFF", Color.DEEP_PINK),
+		Color.from_string("3498db", Color.DEEP_PINK),
+		Color.from_string("e74c3c", Color.DEEP_PINK),
+		Color.from_string("2ecc71", Color.DEEP_PINK),
+		Color.from_string("9b59b6", Color.DEEP_PINK),
+		Color.from_string("f1c40f", Color.DEEP_PINK),
+		Color.from_string("008080", Color.DEEP_PINK),
+		Color.from_string("95a5a6", Color.DEEP_PINK),
+		Color.from_string("a52a2a", Color.DEEP_PINK),
 	]
