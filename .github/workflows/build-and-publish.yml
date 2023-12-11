@@ -7,7 +7,7 @@ on:
       - "v*"
 
 env:
-  ITCHIO_USERNAME: bjornarprytz
+  ITCHIO_USERNAME: thewarlock
   GAME_NAME: scale
   PROJECT_PATH: "./src/"
   GODOT_VERSION: 4.1.2
