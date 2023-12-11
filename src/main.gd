@@ -73,7 +73,7 @@ func _shortcut_input(event: InputEvent) -> void:
 		
 		first.focus = true
 
-func _process(delta: float) -> void:	
+func _process(delta: float) -> void:
 	t += delta
 	elapsed += delta
 	

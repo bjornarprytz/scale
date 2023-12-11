@@ -2,6 +2,7 @@ extends Panel
 class_name AnswerField
 
 
+var known_wrong_answers : Array[int] = []
 var my_kind : ElementCube.Kind
 var is_submitting : bool
 var is_known : bool
@@ -12,6 +13,7 @@ var is_known : bool
 @onready var sheen : ColorRect = $Sheen
 @onready var color_cube : ColorRect = $Answer/H/CubeColor
 @onready var cooldown : TextureProgressBar = $Answer/H2/Submit/Cooldown
+@onready var sudoku_markings : RichTextLabel = $Answer/H/Sudoku
 
 @onready var correct_effect = preload("res://things/correct-2-46134.mp3")
 @onready var wrong_effect = preload("res://things/wrong-47985.mp3")
@@ -39,7 +41,6 @@ func _force_correct():
 	$Answer/H/TextEdit.text = str(my_kind.weight)
 	_submit(str(my_kind.weight))
 
-
 func _ready() -> void:
 	clear.button_down.connect(_clear)
 	submit.button_down.connect(_submit)
@@ -56,13 +57,24 @@ func _submit(text: String):
 	if (is_submitting):
 		return
 	
+	var value = int(text_edit.text)
+	if (known_wrong_answers.has(value)):
+		var shake_magnitude = 4.0
+		var base_x = sudoku_markings.position.x
+		var sudoku_tween = create_tween()
+		sudoku_tween.tween_property(sudoku_markings, "position:x", base_x + shake_magnitude, .05)
+		sudoku_tween.tween_property(sudoku_markings, "position:x", base_x - shake_magnitude, .05)
+		sudoku_tween.set_loops(3)
+		sudoku_tween.tween_property(sudoku_markings, "position:x", base_x, 0.025)
+		return
+	
 	text_edit.editable = false
 	submit.disabled = true
 	is_submitting = true
 
 	var tween = create_tween()
-	
 	if (Autoload.submit_answer(my_kind, int(text))):
+		sudoku_markings.clear()
 		tween.tween_property(self, "self_modulate", Color.WHITE, 0.08)
 		tween.set_parallel()
 		tween.tween_property(sheen, "position:x", 200.0, 0.4)
@@ -73,8 +85,14 @@ func _submit(text: String):
 		await tween.finished
 	else:
 		Autoload.purge.emit(my_kind)
-		
 		$Answer/H2/Submit/Icon.visible = false
+		
+		if (!known_wrong_answers.has(value)):
+			known_wrong_answers.push_back(value)
+			if (sudoku_markings.get_total_character_count() != 0):
+				sudoku_markings.append_text(",")
+				
+			sudoku_markings.append_text("[s]"+text+"[/s]")
 		cooldown.value = 100
 		cooldown.visible = true
 		tween.tween_property(cooldown, "value", 0, Autoload.get_penalty())
@@ -88,9 +106,6 @@ func _submit(text: String):
 		submit.disabled = false
 	
 	is_submitting = false
-
-func _set_submit_text_countdown(t: float):
-	submit.text = "%0.1f" % t
 
 func _on_text_input(new_text : String):
 	var final_text = ""

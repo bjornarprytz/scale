@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://bolcr315p01ql"]
+[gd_scene load_steps=15 format=3 uid="uid://bolcr315p01ql"]
 
 [ext_resource type="Script" path="res://things/answer.gd" id="1_rjccp"]
 [ext_resource type="FontFile" uid="uid://ck5dgaslygqp3" path="res://things/VT323-Regular.ttf" id="1_ry2qf"]
@@ -14,9 +14,13 @@ border_width_right = 2
 border_width_bottom = 2
 border_color = Color(0.643137, 0.85098, 0.780392, 1)
 
+[sub_resource type="Theme" id="Theme_n1rsh"]
+default_font = ExtResource("1_ry2qf")
+default_font_size = 256
+
 [sub_resource type="Theme" id="Theme_cqygd"]
 default_font = ExtResource("1_ry2qf")
-default_font_size = 56
+default_font_size = 64
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_75pex"]
 
@@ -56,9 +60,9 @@ anti_aliasing = false
 
 [node name="Panel" type="Panel"]
 clip_contents = true
-custom_minimum_size = Vector2(90, 120)
+custom_minimum_size = Vector2(90, 125)
 offset_right = 90.0
-offset_bottom = 120.0
+offset_bottom = 125.0
 size_flags_horizontal = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_bey85")
 script = ExtResource("1_rjccp")
@@ -86,57 +90,85 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="H" type="Control" parent="Answer"]
-custom_minimum_size = Vector2(70, 70)
+custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
 
 [node name="CubeColor" type="ColorRect" parent="Answer/H"]
 custom_minimum_size = Vector2(70, 70)
-layout_mode = 2
-offset_right = 60.0
-offset_bottom = 60.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 size_flags_horizontal = 3
+metadata/_edit_lock_ = true
 
 [node name="CubeColor" type="ColorRect" parent="Answer/H/CubeColor"]
-layout_mode = 0
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
 offset_right = 4.0
-offset_bottom = 70.0
+grow_vertical = 2
 size_flags_horizontal = 3
 color = Color(0.47451, 0.47451, 0.47451, 1)
 
 [node name="CubeColor2" type="ColorRect" parent="Answer/H/CubeColor"]
-layout_mode = 0
-offset_left = 66.0
-offset_right = 70.0
-offset_bottom = 70.0
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -4.0
+grow_horizontal = 0
+grow_vertical = 2
 size_flags_horizontal = 3
 color = Color(0.47451, 0.47451, 0.47451, 1)
 
 [node name="CubeColor3" type="ColorRect" parent="Answer/H/CubeColor"]
-layout_mode = 0
-offset_left = 70.0
-offset_right = 74.0
-offset_bottom = 70.0
-rotation = 1.57079
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 1.0
+offset_right = -1.0
+offset_bottom = 4.0
+grow_horizontal = 2
 size_flags_horizontal = 3
 color = Color(0.47451, 0.47451, 0.47451, 1)
 
 [node name="CubeColor4" type="ColorRect" parent="Answer/H/CubeColor"]
-layout_mode = 0
-offset_left = 70.0
-offset_top = 66.0
-offset_right = 74.0
-offset_bottom = 136.0
-rotation = 1.57079
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -4.0
+grow_horizontal = 2
+grow_vertical = 0
 size_flags_horizontal = 3
 color = Color(0.47451, 0.47451, 0.47451, 1)
+
+[node name="Sudoku" type="RichTextLabel" parent="Answer/H"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 53.0
+offset_right = 648.0
+offset_bottom = 288.0
+scale = Vector2(0.1, 0.1)
+theme = SubResource("Theme_n1rsh")
+theme_override_colors/default_color = Color(0.364706, 0.364706, 0.364706, 1)
+bbcode_enabled = true
+text = "[right]"
+scroll_active = false
+autowrap_mode = 2
 
 [node name="TextEdit" type="LineEdit" parent="Answer/H"]
 custom_minimum_size = Vector2(70, 50)
 layout_mode = 0
-offset_left = -17.0
-offset_top = 7.0
-offset_right = 87.0
-offset_bottom = 64.0
+offset_left = -11.0
+offset_top = 5.0
+offset_right = 93.0
+offset_bottom = 72.0
 theme = SubResource("Theme_cqygd")
 theme_override_colors/font_outline_color = Color(0, 0, 0, 0)
 theme_override_colors/selection_color = Color(0, 0, 0, 0)
@@ -152,13 +184,14 @@ shortcut_keys_enabled = false
 middle_mouse_paste_enabled = false
 selecting_enabled = false
 caret_blink = true
+metadata/_edit_lock_ = true
 
 [node name="H2" type="HBoxContainer" parent="Answer"]
 layout_mode = 2
 theme_override_constants/separation = 10
 
 [node name="Submit" type="Button" parent="Answer/H2"]
-custom_minimum_size = Vector2(30, 30)
+custom_minimum_size = Vector2(40, 30)
 layout_mode = 2
 focus_mode = 0
 theme_override_styles/normal = SubResource("StyleBoxFlat_yuf1i")
@@ -166,9 +199,9 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_yuf1i")
 [node name="Icon" type="TextureRect" parent="Answer/H2/Submit"]
 modulate = Color(0, 0.956863, 0, 1)
 layout_mode = 2
-offset_left = 4.0
+offset_left = 10.0
 offset_top = 6.0
-offset_right = 26.0
+offset_right = 32.0
 offset_bottom = 27.0
 mouse_filter = 2
 theme = SubResource("Theme_50a6j")
@@ -181,7 +214,7 @@ visible = false
 layout_mode = 0
 offset_left = 2.0
 offset_top = 2.0
-offset_right = 28.0
+offset_right = 38.0
 offset_bottom = 28.0
 value = 100.0
 fill_mode = 4
