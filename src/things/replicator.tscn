@@ -1,0 +1,176 @@
+[gd_scene load_steps=12 format=3 uid="uid://be8onhuooe8up"]
+
+[ext_resource type="Script" path="res://things/replicator.gd" id="1_ulgwc"]
+[ext_resource type="FontFile" uid="uid://c17a4vbt44ys5" path="res://things/Font Awesome 6 Free-Solid-900.otf" id="2_tw3ge"]
+[ext_resource type="FontFile" uid="uid://ck5dgaslygqp3" path="res://things/VT323-Regular.ttf" id="2_vc0it"]
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_6y1mj"]
+a = Vector2(5, 0)
+b = Vector2(5, 58)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_qiqpl"]
+a = Vector2(5, -5)
+b = Vector2(68, -5)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_osqeg"]
+a = Vector2(-5, -6)
+b = Vector2(-5, -65)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g8n4b"]
+bg_color = Color(0, 0.894118, 0.972549, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="Theme" id="Theme_jyuq4"]
+default_font = ExtResource("2_vc0it")
+default_font_size = 256
+
+[sub_resource type="Theme" id="Theme_p38mn"]
+default_font = ExtResource("2_tw3ge")
+default_font_size = 256
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pe77b"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k7vuc"]
+size = Vector2(59, 28)
+
+[node name="Replicator" type="Node2D"]
+script = ExtResource("1_ulgwc")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource("SegmentShape2D_6y1mj")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(0, 63)
+shape = SubResource("SegmentShape2D_qiqpl")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(73, 64)
+shape = SubResource("SegmentShape2D_osqeg")
+
+[node name="ColorRect" type="ColorRect" parent="StaticBody2D"]
+offset_left = -1.0
+offset_right = 5.0
+offset_bottom = 64.0
+mouse_filter = 2
+color = Color(0, 0.894118, 0.972549, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="ColorRect2" type="ColorRect" parent="StaticBody2D"]
+offset_left = -1.0
+offset_top = 58.0
+offset_right = 74.0
+offset_bottom = 64.0
+mouse_filter = 2
+color = Color(0, 0.894118, 0.972549, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="ColorRect3" type="ColorRect" parent="StaticBody2D"]
+offset_left = 68.0
+offset_top = -1.0
+offset_right = 74.0
+offset_bottom = 64.0
+mouse_filter = 2
+color = Color(0, 0.894118, 0.972549, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="CountPanel" type="Panel" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -12.0
+offset_top = -105.0
+offset_right = 88.0
+offset_bottom = -12.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_g8n4b")
+
+[node name="Count" type="RichTextLabel" parent="CountPanel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -49.0
+offset_top = -34.5
+offset_right = 1191.0
+offset_bottom = 535.5
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.08, 0.08)
+theme = SubResource("Theme_jyuq4")
+bbcode_enabled = true
+text = "[center]Replicate"
+
+[node name="Count2" type="RichTextLabel" parent="CountPanel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -19.0
+offset_top = -11.5
+offset_right = 391.0
+offset_bottom = 558.5
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.1, 0.1)
+theme = SubResource("Theme_p38mn")
+bbcode_enabled = true
+text = "[center]\\square 
+\\arrow-down"
+
+[node name="ColorRect4" type="Panel" parent="CountPanel"]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 81.0
+offset_right = 11.0
+offset_bottom = 87.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_pe77b")
+
+[node name="ColorRect3" type="Panel" parent="CountPanel"]
+layout_mode = 0
+offset_left = 89.0
+offset_top = 82.0
+offset_right = 95.0
+offset_bottom = 88.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_pe77b")
+
+[node name="ColorRect2" type="Panel" parent="CountPanel"]
+layout_mode = 0
+offset_left = 89.0
+offset_top = 5.0
+offset_right = 95.0
+offset_bottom = 11.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_pe77b")
+
+[node name="ColorRect" type="Panel" parent="CountPanel"]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 5.0
+offset_right = 11.0
+offset_bottom = 11.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_pe77b")
+
+[node name="ContentsDetector" type="Area2D" parent="."]
+position = Vector2(8, 29)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ContentsDetector"]
+position = Vector2(28.5, 13)
+shape = SubResource("RectangleShape2D_k7vuc")

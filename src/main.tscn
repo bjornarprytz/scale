@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://bv8m51jf40i6k"]
+[gd_scene load_steps=21 format=3 uid="uid://bv8m51jf40i6k"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_860qy"]
 [ext_resource type="PackedScene" uid="uid://y0ij617emvpo" path="res://things/scale.tscn" id="2_2c80t"]
@@ -9,13 +9,14 @@
 [ext_resource type="Texture2D" uid="uid://duk4qc3fcbtp6" path="res://things/mute-1628277_1280.png" id="5_qeoi0"]
 [ext_resource type="AudioStream" uid="uid://djba3x06rt5uq" path="res://things/nightisthebeginning - 02.04.2023, 12.27.wav" id="8_7xhe6"]
 [ext_resource type="Script" path="res://Music.gd" id="9_cibvk"]
+[ext_resource type="PackedScene" uid="uid://be8onhuooe8up" path="res://things/replicator.tscn" id="10_vpya8"]
 
 [sub_resource type="Theme" id="Theme_75p0t"]
 default_font = ExtResource("4_xs043")
 default_font_size = 256
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hnbky"]
-bg_color = Color(0, 0.721569, 0.337255, 1)
+bg_color = Color(0, 0.501961, 0.227451, 1)
 border_width_left = 2
 border_width_top = 2
 border_width_right = 2
@@ -84,6 +85,7 @@ default_font_size = 128
 script = ExtResource("1_860qy")
 
 [node name="FactoryBackground" type="Sprite2D" parent="."]
+modulate = Color(0.313726, 0.313726, 0.313726, 1)
 position = Vector2(577, 308)
 texture = ExtResource("2_ni5v5")
 
@@ -136,7 +138,7 @@ grow_vertical = 2
 scale = Vector2(0.2, 0.2)
 theme = SubResource("Theme_h8kd7")
 bbcode_enabled = true
-text = "[center]20/20"
+text = "[center]25/25"
 
 [node name="Text" type="RichTextLabel" parent="UIBack/CountPanel"]
 layout_mode = 1
@@ -190,12 +192,12 @@ offset_bottom = 11.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_xv6ol")
 
 [node name="Instructions" type="RichTextLabel" parent="UIBack"]
-modulate = Color(1, 1, 0.513726, 0.67451)
-offset_left = 215.0
-offset_top = 264.0
-offset_right = 15435.0
-offset_bottom = 2924.0
-scale = Vector2(0.05, 0.05)
+modulate = Color(0.556863, 0.552941, 0, 0.67451)
+offset_left = 332.0
+offset_top = 321.0
+offset_right = 15552.0
+offset_bottom = 2981.0
+scale = Vector2(0.03, 0.03)
 mouse_filter = 2
 theme = SubResource("Theme_rq7eu")
 bbcode_enabled = true
@@ -307,6 +309,17 @@ position = Vector2(-33, 463)
 stream = ExtResource("8_7xhe6")
 autoplay = true
 script = ExtResource("9_cibvk")
+
+[node name="Replicator" parent="." instance=ExtResource("10_vpya8")]
+position = Vector2(63, 265)
+
+[node name="ReplicationArea" type="ColorRect" parent="."]
+offset_left = 180.0
+offset_top = 105.0
+offset_right = 1032.0
+offset_bottom = 361.0
+mouse_filter = 2
+color = Color(1, 1, 1, 0)
 
 [connection signal="button_down" from="UIFore/Restart/Button" to="." method="_on_button_button_down"]
 [connection signal="toggled" from="UIFore/ToggleMusic/TextureButton" to="." method="_on_texture_button_toggled"]

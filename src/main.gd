@@ -9,6 +9,8 @@ var SPAWN_TIME := 2.0
 
 @onready var spawn_point : Node2D = $SpawnPoint
 @onready var info : HBoxContainer = $UIBack/Control/AnswerGrid
+@onready var replication_area : ColorRect = $ReplicationArea
+@onready var replicator : Replicator = $Replicator
 
 var won : bool
 var t := 0.0
@@ -19,6 +21,8 @@ func _ready() -> void:
 	Autoload.reset()
 	Autoload.purge.connect(_purge)
 	Autoload.game_over.connect(_game_over)
+	
+	replicator.replicate.connect(_replicate_cube)
 	
 	$UIBack/Instructions.append_text(" (" + str(Autoload.MIN_WEIGHT) + "-" + str(Autoload.MAX_WEIGHT) +")")
 	
@@ -81,10 +85,7 @@ func _process(delta: float) -> void:
 		t = 0.0
 		var nCubes = _get_cube_count()
 		if (nCubes < MAX_CUBES):
-			if (nCubes >= MAX_CUBES - 2 and Autoload.unsolved_elements.size() > 0):
-				_spawn_cube(Autoload.unsolved_elements.pick_random())
-			else:
-				_spawn_cube(Autoload.kinds.pick_random())
+			_spawn_cube(Autoload.unsolved_elements.pick_random())
 		if (won):
 			for c in $Cubes.get_children():
 				c.apply_force(Vector2(randf_range(-1.0, 1.0), randf_range(-1.0, 0.0)) * randf_range(30000.0, 50000.0))
@@ -93,15 +94,29 @@ func _process(delta: float) -> void:
 func _score_formula() -> int:
 	return float(MAX_SCORE - (elapsed * 100.0) + (Autoload.exploded_cubes * 100.0))
 
-func _spawn_cube(kind: ElementCube.Kind):
+func _spawn_cube(kind: ElementCube.Kind, placement: Vector2=Vector2.ZERO):
 	var cube = cube_spawner.instantiate() as ElementCube
 	cube.kind = kind
 	
 	$Cubes.add_child(cube)
-	cube.position = spawn_point.position
+	if placement == Vector2.ZERO:
+		cube.position = spawn_point.position
+	else:
+		cube.position = placement
 	cube.exploded.connect(_update_cube_count, CONNECT_ONE_SHOT)
 
 	_update_cube_count()
+
+func _replicate_cube(kind: ElementCube.Kind):
+	var low_x = replication_area.get_rect().position.x
+	var top_x = replication_area.get_rect().position.x + replication_area.get_rect().size.x
+	var low_y = replication_area.get_rect().position.y
+	var top_y = replication_area.get_rect().position.y + replication_area.get_rect().size.y
+	var placement = Vector2(randf_range(low_x, top_x), randf_range(low_y, top_y))
+	
+	# TODO: Create effect here first
+	
+	_spawn_cube(kind, placement)
 
 func _get_cube_count():
 	var count := 0

@@ -16,7 +16,6 @@ shape = SubResource("RectangleShape2D_icay0")
 offset_left = -74.0
 offset_right = 74.0
 offset_bottom = 5.0
-color = Color(0, 0, 0, 1)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 
