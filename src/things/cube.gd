@@ -79,6 +79,10 @@ func explode():
 	$Effect.pitch_scale = randf_range(0.9, 1.1)
 	$Effect.play()
 	
+	for b in get_colliding_bodies():
+		if b is ElementCube:
+			b.sleeping = false
+	
 	set_deferred("freeze", true)
 	shape.set_deferred("disabled", true)
 	

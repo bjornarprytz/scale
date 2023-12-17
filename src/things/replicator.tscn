@@ -1,8 +1,11 @@
-[gd_scene load_steps=12 format=3 uid="uid://be8onhuooe8up"]
+[gd_scene load_steps=17 format=3 uid="uid://be8onhuooe8up"]
 
 [ext_resource type="Script" path="res://things/replicator.gd" id="1_ulgwc"]
 [ext_resource type="FontFile" uid="uid://c17a4vbt44ys5" path="res://things/Font Awesome 6 Free-Solid-900.otf" id="2_tw3ge"]
 [ext_resource type="FontFile" uid="uid://ck5dgaslygqp3" path="res://things/VT323-Regular.ttf" id="2_vc0it"]
+[ext_resource type="Texture2D" uid="uid://73ar75kn1hof" path="res://things/point-light.png" id="4_yctt5"]
+[ext_resource type="Texture2D" uid="uid://dscec4wxigo04" path="res://things/white-square.png" id="5_swkxx"]
+[ext_resource type="AudioStream" uid="uid://c5ope2ts6noll" path="res://things/power-buzz-sfx-loop-86766.mp3" id="6_50fh7"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_6y1mj"]
 a = Vector2(5, 0)
@@ -16,6 +19,9 @@ b = Vector2(68, -5)
 a = Vector2(-5, -6)
 b = Vector2(-5, -65)
 
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_cpqp1"]
+polygon = PackedVector2Array(0, 61, 72, 61, 72, 0, 68, 0, 68, 58, 5, 58, 5, 0, 0, 0)
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g8n4b"]
 bg_color = Color(0, 0.894118, 0.972549, 1)
 border_width_left = 2
@@ -27,6 +33,13 @@ corner_radius_top_right = 2
 corner_radius_bottom_right = 2
 corner_radius_bottom_left = 2
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pe77b"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
 [sub_resource type="Theme" id="Theme_jyuq4"]
 default_font = ExtResource("2_vc0it")
 default_font_size = 256
@@ -35,15 +48,13 @@ default_font_size = 256
 default_font = ExtResource("2_tw3ge")
 default_font_size = 256
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pe77b"]
-bg_color = Color(1, 1, 1, 1)
-corner_radius_top_left = 4
-corner_radius_top_right = 4
-corner_radius_bottom_right = 4
-corner_radius_bottom_left = 4
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_k7vuc"]
 size = Vector2(59, 28)
+
+[sub_resource type="Curve" id="Curve_7vay8"]
+min_value = -1.0
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
 
 [node name="Replicator" type="Node2D"]
 script = ExtResource("1_ulgwc")
@@ -58,7 +69,7 @@ position = Vector2(0, 63)
 shape = SubResource("SegmentShape2D_qiqpl")
 
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(73, 64)
+position = Vector2(73, 65)
 shape = SubResource("SegmentShape2D_osqeg")
 
 [node name="ColorRect" type="ColorRect" parent="StaticBody2D"]
@@ -80,42 +91,111 @@ metadata/_edit_use_anchors_ = true
 
 [node name="ColorRect3" type="ColorRect" parent="StaticBody2D"]
 offset_left = 68.0
-offset_top = -1.0
 offset_right = 74.0
 offset_bottom = 64.0
 mouse_filter = 2
 color = Color(0, 0.894118, 0.972549, 1)
 metadata/_edit_use_anchors_ = true
 
-[node name="CountPanel" type="Panel" parent="."]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -12.0
-offset_top = -105.0
-offset_right = 88.0
-offset_bottom = -12.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_g8n4b")
+[node name="LightOccluder2D" type="LightOccluder2D" parent="StaticBody2D"]
+occluder = SubResource("OccluderPolygon2D_cpqp1")
 
-[node name="Count" type="RichTextLabel" parent="CountPanel"]
-layout_mode = 1
+[node name="CountPanel" type="Panel" parent="."]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -49.0
-offset_top = -34.5
-offset_right = 1191.0
-offset_bottom = 535.5
+offset_left = -14.0
+offset_top = -97.0
+offset_right = 88.0
+offset_bottom = -3.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_g8n4b")
+metadata/_edit_use_anchors_ = true
+metadata/_edit_lock_ = true
+
+[node name="Panel" type="Control" parent="CountPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 5.0
+offset_top = 5.0
+offset_right = -5.0
+offset_bottom = -5.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+metadata/_edit_lock_ = true
+
+[node name="ColorRect4" type="Panel" parent="CountPanel/Panel"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -6.0
+offset_right = 6.0
+grow_vertical = 0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_pe77b")
+metadata/_edit_use_anchors_ = true
+
+[node name="ColorRect3" type="Panel" parent="CountPanel/Panel"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -6.0
+offset_top = -6.0
+grow_horizontal = 0
+grow_vertical = 0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_pe77b")
+metadata/_edit_use_anchors_ = true
+
+[node name="ColorRect2" type="Panel" parent="CountPanel/Panel"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -6.0
+offset_bottom = 6.0
+grow_horizontal = 0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_pe77b")
+metadata/_edit_use_anchors_ = true
+
+[node name="ColorRect" type="Panel" parent="CountPanel/Panel"]
+layout_mode = 1
+offset_left = 1.0
+offset_top = 1.0
+offset_right = 7.0
+offset_bottom = 7.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_pe77b")
+metadata/_edit_use_anchors_ = true
+
+[node name="Count" type="RichTextLabel" parent="CountPanel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -36.0
+offset_top = 15.0
+offset_right = 882.0
+offset_bottom = 278.0
+grow_horizontal = 2
 scale = Vector2(0.08, 0.08)
+mouse_filter = 2
 theme = SubResource("Theme_jyuq4")
 bbcode_enabled = true
 text = "[center]Replicate"
+metadata/_edit_use_anchors_ = true
 
 [node name="Count2" type="RichTextLabel" parent="CountPanel"]
 layout_mode = 1
@@ -124,53 +204,135 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -19.0
-offset_top = -11.5
-offset_right = 391.0
-offset_bottom = 558.5
+offset_left = -22.0
+offset_top = -11.0
+offset_right = 418.0
+offset_bottom = 559.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.1, 0.1)
+mouse_filter = 2
 theme = SubResource("Theme_p38mn")
 bbcode_enabled = true
 text = "[center]\\square 
 \\arrow-down"
+metadata/_edit_use_anchors_ = true
 
-[node name="ColorRect4" type="Panel" parent="CountPanel"]
-layout_mode = 0
-offset_left = 5.0
-offset_top = 81.0
-offset_right = 11.0
-offset_bottom = 87.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_pe77b")
+[node name="WarningPanel" type="ColorRect" parent="."]
+light_mask = 0
+z_index = 2
+clip_contents = true
+offset_left = 2.0
+offset_top = 2.0
+offset_right = 71.0
+offset_bottom = 61.0
+color = Color(0, 0, 0, 1)
+metadata/_edit_lock_ = true
 
-[node name="ColorRect3" type="Panel" parent="CountPanel"]
+[node name="ColorRect2" type="ColorRect" parent="WarningPanel"]
+clip_contents = true
 layout_mode = 0
-offset_left = 89.0
-offset_top = 82.0
-offset_right = 95.0
-offset_bottom = 88.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_pe77b")
+offset_left = -23.0
+offset_top = 35.0
+offset_right = 79.0
+offset_bottom = 41.0
+rotation = -0.785397
+color = Color(0.729412, 0.729412, 0.196078, 1)
 
-[node name="ColorRect2" type="Panel" parent="CountPanel"]
+[node name="ColorRect3" type="ColorRect" parent="WarningPanel"]
+clip_contents = true
 layout_mode = 0
-offset_left = 89.0
-offset_top = 5.0
-offset_right = 95.0
-offset_bottom = 11.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_pe77b")
+offset_left = -11.0
+offset_top = 46.0
+offset_right = 91.0
+offset_bottom = 52.0
+rotation = -0.785397
+color = Color(0.729412, 0.729412, 0.196078, 1)
 
-[node name="ColorRect" type="Panel" parent="CountPanel"]
+[node name="ColorRect4" type="ColorRect" parent="WarningPanel"]
+clip_contents = true
 layout_mode = 0
-offset_left = 5.0
-offset_top = 5.0
-offset_right = 11.0
-offset_bottom = 11.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_pe77b")
+offset_left = -6.0
+offset_top = 64.0
+offset_right = 96.0
+offset_bottom = 70.0
+rotation = -0.785397
+color = Color(0.729412, 0.729412, 0.196078, 1)
+
+[node name="ColorRect5" type="ColorRect" parent="WarningPanel"]
+clip_contents = true
+layout_mode = 0
+offset_left = 17.0
+offset_top = 65.0
+offset_right = 119.0
+offset_bottom = 71.0
+rotation = -0.785397
+color = Color(0.729412, 0.729412, 0.196078, 1)
+
+[node name="ColorRect6" type="ColorRect" parent="WarningPanel"]
+clip_contents = true
+layout_mode = 0
+offset_left = 32.0
+offset_top = 75.0
+offset_right = 134.0
+offset_bottom = 81.0
+rotation = -0.785397
+color = Color(0.729412, 0.729412, 0.196078, 1)
 
 [node name="ContentsDetector" type="Area2D" parent="."]
 position = Vector2(8, 29)
+metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ContentsDetector"]
 position = Vector2(28.5, 13)
 shape = SubResource("RectangleShape2D_k7vuc")
+
+[node name="GreenSprectralCombobulator" type="PointLight2D" parent="."]
+position = Vector2(36, 42)
+scale = Vector2(9.75, 7)
+enabled = false
+color = Color(0, 1, 0, 1)
+energy = 0.5
+shadow_enabled = true
+texture = ExtResource("4_yctt5")
+
+[node name="RedSpectralCombobulator" type="PointLight2D" parent="."]
+position = Vector2(36, 42)
+scale = Vector2(9.75, 7)
+enabled = false
+color = Color(1, 0, 0, 1)
+energy = 0.5
+shadow_enabled = true
+texture = ExtResource("4_yctt5")
+
+[node name="BlueSprectralCombobulator" type="PointLight2D" parent="."]
+position = Vector2(36, 42)
+scale = Vector2(9.75, 7)
+enabled = false
+color = Color(0, 0, 1, 1)
+energy = 0.5
+shadow_enabled = true
+texture = ExtResource("4_yctt5")
+
+[node name="StrayAtoms" type="CPUParticles2D" parent="."]
+position = Vector2(37, 19)
+emitting = false
+amount = 25
+texture = ExtResource("5_swkxx")
+emission_shape = 1
+emission_sphere_radius = 30.0
+gravity = Vector2(0, -50)
+angle_min = -156.1
+angle_max = 2.5
+scale_amount_min = 0.1
+scale_amount_max = 0.2
+hue_variation_min = -0.53
+hue_variation_max = 0.6
+hue_variation_curve = SubResource("Curve_7vay8")
+
+[node name="Hum" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_50fh7")
+volume_db = 20.0
+
+[connection signal="body_entered" from="ContentsDetector" to="." method="_on_contents_detector_body_entered"]
+[connection signal="body_exited" from="ContentsDetector" to="." method="_on_contents_detector_body_exited"]

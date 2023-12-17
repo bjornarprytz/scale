@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=3 uid="uid://bqgy7a8n1rmot"]
+
+[ext_resource type="Texture2D" uid="uid://dscec4wxigo04" path="res://things/white-square.png" id="1_0hd7r"]
+
+[node name="materialize_effect" type="CPUParticles2D"]
+amount = 50
+lifetime = 0.8
+texture = ExtResource("1_0hd7r")
+emission_shape = 1
+emission_sphere_radius = 100.0
+gravity = Vector2(0, 0)
+angular_velocity_min = 90.0
+angular_velocity_max = 120.0
+radial_accel_min = -100.0
+radial_accel_max = -100.0
+scale_amount_min = 0.1
+scale_amount_max = 0.3

@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://bv8m51jf40i6k"]
+[gd_scene load_steps=22 format=3 uid="uid://bv8m51jf40i6k"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_860qy"]
 [ext_resource type="PackedScene" uid="uid://y0ij617emvpo" path="res://things/scale.tscn" id="2_2c80t"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://4a47icpx8ljl" path="res://things/sound.png" id="4_kecux"]
 [ext_resource type="FontFile" uid="uid://ck5dgaslygqp3" path="res://things/VT323-Regular.ttf" id="4_xs043"]
 [ext_resource type="Texture2D" uid="uid://duk4qc3fcbtp6" path="res://things/mute-1628277_1280.png" id="5_qeoi0"]
+[ext_resource type="AudioStream" uid="uid://c3ercwrenfmmt" path="res://things/pop2-84862.mp3" id="8_5xgeh"]
 [ext_resource type="AudioStream" uid="uid://djba3x06rt5uq" path="res://things/nightisthebeginning - 02.04.2023, 12.27.wav" id="8_7xhe6"]
 [ext_resource type="Script" path="res://Music.gd" id="9_cibvk"]
 [ext_resource type="PackedScene" uid="uid://be8onhuooe8up" path="res://things/replicator.tscn" id="10_vpya8"]
@@ -85,7 +86,7 @@ default_font_size = 128
 script = ExtResource("1_860qy")
 
 [node name="FactoryBackground" type="Sprite2D" parent="."]
-modulate = Color(0.313726, 0.313726, 0.313726, 1)
+modulate = Color(0.223529, 0.223529, 0.223529, 1)
 position = Vector2(577, 308)
 texture = ExtResource("2_ni5v5")
 
@@ -275,7 +276,7 @@ fit_content = true
 offset_left = 42.0
 offset_top = 720.0
 offset_right = 2000.0
-offset_bottom = 2540.0
+offset_bottom = 2694.0
 scale = Vector2(0.5, 0.5)
 theme = SubResource("Theme_5d002")
 bbcode_enabled = true
@@ -285,6 +286,7 @@ text = "[rainbow]Credits[/rainbow]
 [wave freq=10.0 amp=30]Music by KBHMFS[/wave]
 
 
+FontAwesome
 
 From Pixabay:
 - Icons by Josy Dom Alexis
@@ -304,6 +306,10 @@ position = Vector2(34, 510)
 position = Vector2(-33, 463)
 
 [node name="Cubes" type="Node" parent="."]
+
+[node name="Pop" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_5xgeh")
+max_polyphony = 3
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("8_7xhe6")

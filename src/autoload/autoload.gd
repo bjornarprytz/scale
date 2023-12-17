@@ -15,7 +15,7 @@ var correct_answers: Array[ElementCube.Kind] = []
 var wrong_answers := 0
 var exploded_cubes := 0
 
-var possible_colors = _generate_contrast_palette()
+var possible_colors = _generate_okabe_ito_palette()
 
 func reset():
 	kinds = []
@@ -77,16 +77,15 @@ static func get_contrast(c : Color) -> Color:
 		contrast_color = Color(1, 1, 1, alpha)
 	
 	return contrast_color
-	
 
-static func _generate_contrast_palette() -> Array[Color]:
+static func _generate_okabe_ito_palette() -> Array[Color]:
 	return [
-		Color.from_string("3498db", Color.DEEP_PINK),
-		Color.from_string("e74c3c", Color.DEEP_PINK),
-		Color.from_string("2ecc71", Color.DEEP_PINK),
-		Color.from_string("9b59b6", Color.DEEP_PINK),
-		Color.from_string("f1c40f", Color.DEEP_PINK),
-		Color.from_string("008080", Color.DEEP_PINK),
-		Color.from_string("95a5a6", Color.DEEP_PINK),
-		Color.from_string("a52a2a", Color.DEEP_PINK),
+		Color(0.1,0.1,0.1),
+		Color(0.9, 0.6, 0),
+		Color(0.35, 0.7, 0.9),
+		Color(0, 0.6, 0.5),
+		Color(0.95, 0.9, 0.25),
+		Color(0, 0.45, 0.7),
+		Color(0.8, 0.4, 0),
+		Color(0.8, 0.6, 0.7)
 	]

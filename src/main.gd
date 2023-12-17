@@ -6,6 +6,7 @@ var SPAWN_TIME := 2.0
 
 @onready var cube_spawner = preload("res://things/cube.tscn")
 @onready var answer_spawner = preload("res://things/answer.tscn")
+@onready var materialize_effecet_spawner = preload("res://things/materialize_effect.tscn")
 
 @onready var spawn_point : Node2D = $SpawnPoint
 @onready var info : HBoxContainer = $UIBack/Control/AnswerGrid
@@ -85,16 +86,33 @@ func _process(delta: float) -> void:
 		t = 0.0
 		var nCubes = _get_cube_count()
 		if (nCubes < MAX_CUBES):
-			_spawn_cube(Autoload.unsolved_elements.pick_random())
+			_spawn_cube(_random_kind())
 		if (won):
 			for c in $Cubes.get_children():
 				c.apply_force(Vector2(randf_range(-1.0, 1.0), randf_range(-1.0, 0.0)) * randf_range(30000.0, 50000.0))
 		
 
+func _random_kind() -> ElementCube.Kind:
+	var candidates : Array[ElementCube.Kind] = []
+	var cubes = _get_cubes()
+	for kind in Autoload.kinds:
+		var found_match := false
+		for cube in cubes:
+			if cube.kind == kind:
+				found_match = true
+				break
+		if !found_match:
+			candidates.push_front(kind)
+	
+	if (candidates.is_empty()):
+		return Autoload.kinds.pick_random()
+	else:
+		return candidates.pick_random()
+
 func _score_formula() -> int:
 	return float(MAX_SCORE - (elapsed * 100.0) + (Autoload.exploded_cubes * 100.0))
 
-func _spawn_cube(kind: ElementCube.Kind, placement: Vector2=Vector2.ZERO):
+func _spawn_cube(kind: ElementCube.Kind, placement: Vector2=Vector2.ZERO) -> ElementCube:
 	var cube = cube_spawner.instantiate() as ElementCube
 	cube.kind = kind
 	
@@ -106,25 +124,50 @@ func _spawn_cube(kind: ElementCube.Kind, placement: Vector2=Vector2.ZERO):
 	cube.exploded.connect(_update_cube_count, CONNECT_ONE_SHOT)
 
 	_update_cube_count()
+	
+	return cube
 
 func _replicate_cube(kind: ElementCube.Kind):
+	const MATERIALIZE_DURATION = 1.2
+	
 	var low_x = replication_area.get_rect().position.x
 	var top_x = replication_area.get_rect().position.x + replication_area.get_rect().size.x
 	var low_y = replication_area.get_rect().position.y
 	var top_y = replication_area.get_rect().position.y + replication_area.get_rect().size.y
 	var placement = Vector2(randf_range(low_x, top_x), randf_range(low_y, top_y))
 	
-	# TODO: Create effect here first
+	var effect = materialize_effecet_spawner.instantiate() as CPUParticles2D
+	effect.emitting = true
+	add_child(effect)
+	effect.position = placement
+	effect.color = kind.color
 	
-	_spawn_cube(kind, placement)
+	var cube = _spawn_cube(kind, placement)
+	var initial_scale = cube.scale
+	
+	cube.scale = Vector2.ZERO
+	
+	var spawn_tween = create_tween().set_parallel()
+	spawn_tween.tween_property(cube, "scale", initial_scale, MATERIALIZE_DURATION)
+	
+	await spawn_tween.finished
+	
+	$Pop.pitch_scale = randf_range(0.9, 1.1)
+	$Pop.play()
+	
+	cube.linear_velocity = Vector2.ZERO
+	effect.queue_free()
 
-func _get_cube_count():
-	var count := 0
-	
+
+func _get_cubes() -> Array[ElementCube]:
+	var cubes : Array[ElementCube] = []
 	for c in $Cubes.get_children():
 		if !c.has_exploded:
-			count += 1
-	return count
+			cubes.push_back(c)
+	return cubes
+
+func _get_cube_count():
+	return _get_cubes().size()
 
 func _update_cube_count():
 	$UIBack/CountPanel/Count.clear()

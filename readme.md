@@ -12,8 +12,6 @@ Scales with two platforms to put cubes on
 
 ## TODO
 
-- Make effect when spawning a replicated cube
-
 ### Nice to have
 
 - Make it work on mobile
