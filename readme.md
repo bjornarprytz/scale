@@ -1,5 +1,9 @@
 # scale
 
+This is a game made for the [Game Off 2023 Event](https://itch.io/jam/game-off-2023)
+
+You can play it [here](https://thewarlock.itch.io/scale)
+
 ## Restrictions
 
 Theme: Scale + Unstable
