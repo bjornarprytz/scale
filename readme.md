@@ -17,9 +17,6 @@ Scales with two platforms to put cubes on
 ## TODO
 
 - Bug: invisible blockers from replicated
-- Remove the limit sign
-- Highlight frame instead of color of cubes
-- Underline 6 and 9
 - Draggable UI
 
 ### Nice to have

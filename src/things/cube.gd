@@ -41,7 +41,12 @@ func _check_correct(guessed_kind: ElementCube.Kind):
 
 func _reveal_weight():
 	$Weight.clear()
-	$Weight.append_text("[center]"+str(kind.weight))
+	
+	var text = "[center]"
+	if (kind.weight == 6 or kind.weight == 9):
+		text += "[u]"
+	text += str(kind.weight)
+	$Weight.append_text(text)
 	$Weight.modulate = Autoload.get_contrast(kind.color)
 
 func _physics_process(delta: float) -> void:

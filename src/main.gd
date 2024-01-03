@@ -121,9 +121,6 @@ func _spawn_cube(kind: ElementCube.Kind, placement: Vector2=Vector2.ZERO) -> Ele
 		cube.position = spawn_point.position
 	else:
 		cube.position = placement
-	cube.exploded.connect(_update_cube_count, CONNECT_ONE_SHOT)
-
-	_update_cube_count()
 	
 	return cube
 
@@ -168,11 +165,6 @@ func _get_cubes() -> Array[ElementCube]:
 
 func _get_cube_count():
 	return _get_cubes().size()
-
-func _update_cube_count():
-	$UIBack/CountPanel/Count.clear()
-	$UIBack/CountPanel/Count.append_text("[center]" + str(_get_cube_count()) + "/" + str(MAX_CUBES))
-
 
 func _on_button_button_down() -> void:
 	get_tree().reload_current_scene()
