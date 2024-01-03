@@ -14,11 +14,6 @@ Stipulation: Physical
 Carry cubes of unstable material to a scale in order to determine their weights
 Scales with two platforms to put cubes on
 
-## TODO
-
-- Bug: invisible blockers from replicated
-- Draggable UI
-
 ### Nice to have
 
 - Make it work on mobile
